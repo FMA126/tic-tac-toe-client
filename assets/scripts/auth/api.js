@@ -7,7 +7,7 @@ const signUp = formData => {
   console.log('from api signUp')
 
   return $.ajax({
-    url: config.apiUrl + '/sign-ups',
+    url: config.apiUrl + '/sign-up',
     method: 'POST',
     data: formData
   })
