@@ -7,7 +7,7 @@ const signUp = formData => {
   console.log('from api signUp')
 
   return $.ajax({
-    url: config.apiUrl + '/sign-ups',
+    url: config.apiUrl + '/sign-up',
     method: 'POST',
     data: formData
   })
@@ -35,8 +35,22 @@ const signOut = () => {
   })
 }
 
+const changePassword = formData => {
+  console.log('from api changePassword')
+
+  return $.ajax({
+    url: config.apiUrl + '/change-password',
+    method: 'PATCH',
+    data: formData,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
-  signOut
+  signOut,
+  changePassword
 }
