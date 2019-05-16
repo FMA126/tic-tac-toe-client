@@ -5,12 +5,14 @@ const onSignUpSuccess = responseData => {
   // $('#message').removeClass()
   $('#message').text('Signed up successfully!')
   // $('#message').addClass('success')
+  $('form').trigger('reset')
 }
 
 const onSignUpFailure = responseData => {
   console.log('failure', responseData)
   $('#message').text('Signed up failed!')
   // $('#message').addClass('failure')
+  $('form').trigger('reset')
 }
 
 const onSignInSuccess = responseData => {
@@ -18,6 +20,7 @@ const onSignInSuccess = responseData => {
   // $('#message').removeClass()
   $('#message').text('Signed in successfully!')
   // $('#message').addClass('success')
+  $('form').trigger('reset')
 
   store.user = responseData.user
 }
@@ -26,6 +29,7 @@ const onSignInFailure = responseData => {
   console.log('failure', responseData)
   $('#message').text('Signed in failed!')
   // $('#message').addClass('failure')
+  $('form').trigger('reset')
 }
 
 const onSignOutSuccess = responseData => {
@@ -33,12 +37,14 @@ const onSignOutSuccess = responseData => {
   // $('#message').removeClass()
   $('#message').text('Signed out successfully!')
   // $('#message').addClass('success')
+  $('form').trigger('reset')
 }
 
 const onSignOutFailure = responseData => {
   console.log('failure', responseData)
   $('#message').text('Signed out failed!')
   // $('#message').addClass('failure')
+  $('form').trigger('reset')
 }
 
 const onChangePasswordSuccess = () => {
@@ -46,12 +52,14 @@ const onChangePasswordSuccess = () => {
   // $('#message').removeClass()
   $('#message').text('Changed password successfully!')
   // $('#message').addClass('success')
+  $('form').trigger('reset')
 }
 
 const onChangePasswordFailure = responseData => {
-  console.log('failure', responseData)
+  console.log('failure')
   $('#message').text('Change password failed!')
   // $('#message').addClass('failure')
+  $('form').trigger('reset')
 }
 
 module.exports = {
