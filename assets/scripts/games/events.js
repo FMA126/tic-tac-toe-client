@@ -14,6 +14,18 @@ const onCreate = event => {
     .catch(ui.onCreateGameFailure)
 }
 
+const onIndex = event => {
+  event.preventDefault()
+  // const form = event.target
+  // const formData = getFormFields(form)
+
+  console.log('create examples pressed')
+  api.onIndexGame()
+    .then(ui.onIndexGameSuccess)
+    .catch(ui.onIndexGameFailure)
+}
+
 module.exports = {
-  onCreate
+  onCreate,
+  onIndex
 }

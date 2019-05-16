@@ -17,4 +17,5 @@ $(() => {
   $('#change-password').on('submit', authEvents.onChangePassword)
   // Game listeners
   $('#games-create').on('submit', gameEvents.onCreate)
+  $('#games-index').on('submit', gameEvents.onIndex)
 })
