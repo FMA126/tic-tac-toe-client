@@ -18,4 +18,5 @@ $(() => {
   // Game listeners
   $('#games-create').on('submit', gameEvents.onCreate)
   $('#games-index').on('submit', gameEvents.onIndex)
+  $('#games-show').on('submit', gameEvents.onShow)
 })
