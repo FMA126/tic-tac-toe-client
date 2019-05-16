@@ -10,8 +10,8 @@ const onCreate = event => {
 
   console.log('create examples pressed')
   api.onCreateGame()
-    .then(ui.onCreateExampleSuccess)
-    // .catch(ui.onCreateExampleFailure)
+    .then(ui.onCreateGameSuccess)
+    .catch(ui.onCreateGameFailure)
 }
 
 module.exports = {
