@@ -56,11 +56,29 @@ const onShowGameFailure = responseData => {
   $('#message').text('Failed to get all examples!')
   // $('#message').addClass('failure')
 }
+
+const onUpdateGameSuccess = responseData => {
+  $('#display').html('')
+  console.log('success', responseData)
+  const game = responseData.game
+
+  $('#display').append(`<p>Game id: ${game.id} cells: ${game.cells}
+    over: ${game.over} player_x: ${game.player_x} player_o: ${game.player_o}
+    </p><hr>`)
+}
+
+const onUpdateGameFailure = responseData => {
+  console.log('failure', responseData)
+  $('#message').text('Failed to get all examples!')
+  // $('#message').addClass('failure')
+}
 module.exports = {
   onCreateGameSuccess,
   onCreateGameFailure,
   onIndexGameSuccess,
   onIndexGameFailure,
   onShowGameSuccess,
-  onShowGameFailure
+  onShowGameFailure,
+  onUpdateGameSuccess,
+  onUpdateGameFailure
 }

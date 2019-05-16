@@ -41,8 +41,24 @@ const onShowGame = (formData) => {
   })
 }
 
+const onUpdateGame = (requestData) => {
+  console.log('from api createGame')
+  console.log('form data', requestData)
+  const id = store.currentGameID
+
+  return $.ajax({
+    url: config.apiUrl + '/games/' + id,
+    method: 'PATCH',
+    data: requestData,
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   onCreateGame,
   onIndexGame,
-  onShowGame
+  onShowGame,
+  onUpdateGame
 }
