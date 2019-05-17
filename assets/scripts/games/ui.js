@@ -5,9 +5,9 @@ const store = require('../store')
 const onCreateGameSuccess = (responseData) => {
   console.log('success', responseData)
   // $('#message').removeClass()
-  $('#message').text('Created game successfully!')
+  // $('#message').text('Created game successfully!')
   // $('#message').addClass('success')
-
+  $('#landing').hide()
   store.currentGameID = responseData.game.id
   console.log(`current game id : ${store.currentGameID}`)
 }
@@ -43,7 +43,7 @@ const onShowGameSuccess = responseData => {
   $('#display').html('')
 
   const game = responseData.game
-
+  store.currentGameID = responseData.game.id
   $('#display').append(`<p>Game id: ${game.id} cells: ${game.cells}
     over: ${game.over} player_x: ${game.player_x} player_o: ${game.player_o}
     </p><hr>`)

@@ -13,6 +13,9 @@ $(() => {
   // Sign in listeners
   $('#sign-up').on('submit', authEvents.onSignUp)
   $('#sign-in').on('submit', authEvents.onSignIn)
+  // create game on sign in
+  // setTimeout(() => $('#sign-in').on('submit', gameEvents.onCreate), 1000)
+  // create game on sign in
   $('#sign-out').on('submit', authEvents.onSignOut)
   $('#change-password').on('submit', authEvents.onChangePassword)
   // Game listeners

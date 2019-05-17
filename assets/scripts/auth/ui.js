@@ -1,16 +1,18 @@
+'use strict'
+
 const store = require('../store')
 
 const onSignUpSuccess = responseData => {
   console.log('success', responseData)
   // $('#message').removeClass()
-  $('#message').text('Signed up successfully!')
-  // $('#message').addClass('success')
+  // $('#message').text('Signed up successfully!')
+  $('#sign-in-message').text('Signed up successfully! Please sign in')
   $('form').trigger('reset')
 }
 
 const onSignUpFailure = responseData => {
   console.log('failure', responseData)
-  $('#message').text('Signed up failed!')
+  $('#sign-in-message').text('Signed up failed! Please sign up again')
   // $('#message').addClass('failure')
   $('form').trigger('reset')
 }
@@ -18,11 +20,17 @@ const onSignUpFailure = responseData => {
 const onSignInSuccess = responseData => {
   console.log('success', responseData)
   // $('#message').removeClass()
-  $('#message').text('Signed in successfully!')
+  $('#sign-in-message').text('')
+  $('#sign-in-message').text('Signed in successfully!')
   // $('#message').addClass('success')
   $('form').trigger('reset')
-
+  $('#landing').hide()
+  $('#game-board').show()
   store.user = responseData.user
+  // wait to clear and load the game board
+  //  setTimeout(loadGameBoard, 2000)
+  // $('main').html('')
+  // $('main').html(gameBoard.gameLayout)
 }
 
 const onSignInFailure = responseData => {
