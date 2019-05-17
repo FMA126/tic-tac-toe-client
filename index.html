@@ -73,23 +73,53 @@
       </section>
 
         <section id="game-board" class="game-board">
-          <div class="container">
-            <div class="row mb-2">
-              <div class="col-3 box" style="background: pink">x</div>
-              <div class="col-3 box" style="background: pink">x</div>
-              <div class="col-3 box" style="background: pink">x</div>
+          <form class="container">
+            <div class="d-flex justify-content-between mb-2">
+              <input id="box-0"
+              class="col-3 box"
+              type="submit"
+              value="x" />
+              <input id="box-1"
+              class="col-3 box"
+              type="submit"
+              value="o" />
+              <input id="box-2"
+              class="col-3 box"
+              type="submit"
+              value="x" />
             </div>
-            <div class="row mb-2">
-              <div class="col-3 box" style="background: yellow">x</div>
-              <div class="col-3 box" style="background: yellow">x</div>
-              <div class="col-3 box" style="background: yellow">x</div>
+            <div class="d-flex justify-content-between mb-2">
+              <input id="box-3"
+              class="col-3 box"
+              type="submit"
+              value="o" />
+              <input id="box-4"
+              class="col-3 box"
+              type="submit"
+              value="x" />
+              <input id="box-5"
+              class="col-3 box"
+              type="submit"
+              value="o" />
             </div>
-            <div class="row mb-2">
-              <div class="col-3 box" style="background: red">x</div>
-              <div class="col-3 box" style="background: red">x</div>
-              <div class="col-3 box" style="background: red">x</div>
+            <div class="d-flex justify-content-between mb-2">
+              <input id="box-6"
+              class="col-3 box"
+              type="submit"
+              value="x" />
+              <input id="box-7"
+              class="col-3 box"
+              type="submit"
+              value="o" />
+              <input id="box-8"
+              class="col-3 box"
+              type="submit"
+              value="x" />
             </div>
-          </div>
+          </form>
+
+          <!-- Game Controls -->
+
           <div class="container">
             <h3 id="message-games"></h3>
             <h2>Create Game</h2>
@@ -120,6 +150,8 @@
             </form>
 
           </div>
+
+          <!-- Auth controls: sign-out change password -->
 
           <div class="container">
             <h2>Sign Out</h2>

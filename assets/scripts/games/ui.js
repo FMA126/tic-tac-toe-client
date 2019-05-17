@@ -4,12 +4,17 @@ const store = require('../store')
 
 const onCreateGameSuccess = (responseData) => {
   console.log('success', responseData)
+  $('#display').html('')
   // $('#message').removeClass()
   // $('#message').text('Created game successfully!')
   // $('#message').addClass('success')
-  $('#landing').hide()
   store.currentGameID = responseData.game.id
+  const game = responseData.game
   console.log(`current game id : ${store.currentGameID}`)
+
+  $('#display').append(`<p>Game id: ${game.id} cells: ${game.cells}
+    over: ${game.over} player_x: ${game.player_x} player_o: ${game.player_o}
+    </p><hr>`)
 }
 
 const onCreateGameFailure = (responseData) => {

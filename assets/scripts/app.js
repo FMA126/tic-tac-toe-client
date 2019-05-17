@@ -18,9 +18,11 @@ $(() => {
   // create game on sign in
   $('#sign-out').on('submit', authEvents.onSignOut)
   $('#change-password').on('submit', authEvents.onChangePassword)
-  // Game listeners
+  // Game control listeners
   $('#games-create').on('submit', gameEvents.onCreate)
   $('#games-index').on('submit', gameEvents.onIndex)
   $('#games-show').on('submit', gameEvents.onShow)
-  $('#games-update').on('submit', gameEvents.onUpdate)
+  // Game play listeners
+  // $('#games-update').on('submit', gameEvents.onUpdate)
+  $('#box-0').on('submit', gameEvents.onUpdate)
 })

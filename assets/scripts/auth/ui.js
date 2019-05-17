@@ -45,6 +45,8 @@ const onSignOutSuccess = responseData => {
   // $('#message').removeClass()
   $('#message').text('Signed out successfully!')
   // $('#message').addClass('success')
+  $('#landing').show()
+  $('#game-board').hide()
   $('form').trigger('reset')
 }
 
