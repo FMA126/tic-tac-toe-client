@@ -13,11 +13,25 @@ $(() => {
   // Sign in listeners
   $('#sign-up').on('submit', authEvents.onSignUp)
   $('#sign-in').on('submit', authEvents.onSignIn)
+  // create game on sign in
+  // setTimeout(() => $('#sign-in').on('submit', gameEvents.onCreate), 1000)
+  // create game on sign in
   $('#sign-out').on('submit', authEvents.onSignOut)
   $('#change-password').on('submit', authEvents.onChangePassword)
-  // Game listeners
+  // Game control listeners
   $('#games-create').on('submit', gameEvents.onCreate)
+  // $('#box-0').on('click', gameEvents.onUpdate)
   $('#games-index').on('submit', gameEvents.onIndex)
   $('#games-show').on('submit', gameEvents.onShow)
+  // Game play listeners
   $('#games-update').on('submit', gameEvents.onUpdate)
+  $('#box-0').on('click', gameEvents.onUpdate)
+  $('#box-1').on('click', gameEvents.onUpdate)
+  $('#box-2').on('click', gameEvents.onUpdate)
+  $('#box-3').on('click', gameEvents.onUpdate)
+  $('#box-4').on('click', gameEvents.onUpdate)
+  $('#box-5').on('click', gameEvents.onUpdate)
+  $('#box-6').on('click', gameEvents.onUpdate)
+  $('#box-7').on('click', gameEvents.onUpdate)
+  $('#box-8').on('click', gameEvents.onUpdate)
 })

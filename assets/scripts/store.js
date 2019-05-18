@@ -1,6 +1,10 @@
 'use strict'
 
-const store = {
+const game = {
+  FreshGame: {},
+  ArchivedGames: []
 }
 
-module.exports = store
+module.exports = {
+  game
+}

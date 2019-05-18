@@ -42,9 +42,10 @@ const onShowGame = (formData) => {
 }
 
 const onUpdateGame = (requestData) => {
-  console.log('from api createGame')
+  console.log('from api updateGame')
   console.log('form data', requestData)
-  const id = store.currentGameID
+  const id = store.game.FreshGame.getId()
+  console.log('Game id from api', store.game.FreshGame.getId())
 
   return $.ajax({
     url: config.apiUrl + '/games/' + id,

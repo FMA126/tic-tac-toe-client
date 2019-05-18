@@ -1,5 +1,7 @@
 'use strict'
 
+const store = require('../store')
+
 const getFormFields = require('../../../lib/get-form-fields.js')
 const api = require('./api')
 const ui = require('./ui')
@@ -36,19 +38,33 @@ const onShow = event => {
     .then(ui.onUpdateGameSuccess)
     .catch(ui.onUpdateGameFailure)
 }
+// -------------------------
+// update game
+// -------------------------
 
 const onUpdate = event => {
-  event.preventDefault()
+  const dataIndex = $(`#${event.target.id}`).data('box-num')
   const requestData = {
     'game': {
       'cell': {
-        'index': 0,
-        'value': 'x'
+        'index': dataIndex,
+        'value': 'something wrong'
       },
       'over': false
     }
   }
-  console.log('update examples pressed')
+  // console.log(store.game.FreshGame.isPlayerTurn() === 'player x')
+  if (store.game.FreshGame.isPlayerTurn() === 'player x') {
+    store.game.FreshGame.setLastCellValue('x')
+  } else {
+    store.game.FreshGame.setLastCellValue('o')
+  }
+  event.preventDefault()
+  store.game.FreshGame.setLastSquareId(event.target.id)
+  store.game.FreshGame.setLastCellIndex(dataIndex)
+  requestData.game.cell.value = store.game.FreshGame.getLastCellValue()
+
+  console.log('update game pressed')
   api.onUpdateGame(requestData)
     .then(ui.onUpdateGameSuccess)
     .catch(ui.onUpdateGameFailure)
