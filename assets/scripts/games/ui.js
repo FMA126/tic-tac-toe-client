@@ -87,13 +87,11 @@ const onUpdateGameSuccess = responseData => {
   console.log('success', responseData)
   console.log(store.game.FreshGame)
   const game = responseData.game
-  console.log(game.cells)
+
   store.game.FreshGame.setCells(game.cells)
   store.game.FreshGame.setId(game.id)
   store.game.FreshGame.setOver(game.over)
 
-  console.log(store.game.FreshGame.getLastSquareId())
-  console.log(store.game.FreshGame.getLastCellValue())
   $(`#${store.game.FreshGame.getLastSquareId()}`).text(store.game.FreshGame.getLastCellValue())
   $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()} cells: ${store.game.FreshGame.getCells()}
     over: ${store.game.FreshGame.getOver()} player_x: ${store.game.FreshGame.getPlayerX()} player_o: ${store.game.FreshGame.getPlayerO()}
