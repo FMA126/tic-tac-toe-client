@@ -1,13 +1,15 @@
 @import '~bootstrap/scss/bootstrap';
 
+$square: #7d8e72;
+
 
 .game-board {
-  display: none;
+  display: dispay;
 
 }
 
 .box {
-  background: blue;
+  background: $square;
   height: 100px;
   width: 100px;
 }

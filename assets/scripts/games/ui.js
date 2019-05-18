@@ -1,19 +1,27 @@
 'use strict'
 
 const store = require('../store')
+const gameEngine = require('./game-engine')
+const GameConstructor = gameEngine.Gameboard
 
 const onCreateGameSuccess = (responseData) => {
   console.log('success', responseData)
   $('#display').html('')
-  // $('#message').removeClass()
-  // $('#message').text('Created game successfully!')
-  // $('#message').addClass('success')
-  store.currentGameID = responseData.game.id
-  const game = responseData.game
-  console.log(`current game id : ${store.currentGameID}`)
 
-  $('#display').append(`<p>Game id: ${game.id} cells: ${game.cells}
-    over: ${game.over} player_x: ${game.player_x} player_o: ${game.player_o}
+  store.game.FreshGame = new GameConstructor(
+    responseData.game.id,
+    responseData.game.cells,
+    responseData.game.over,
+    responseData.game.player_o,
+    responseData.game.player_x
+  )
+  console.log(store.game.FreshGame)
+
+  $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
+  cells: ${store.game.FreshGame.getCells()}
+    over: ${store.game.FreshGame.getOver()}
+    player_x: ${store.game.FreshGame.getPlayerX()}
+    player_o: ${store.game.FreshGame.getPlayerO()}
     </p><hr>`)
 }
 
@@ -43,38 +51,58 @@ const onIndexGameFailure = responseData => {
   // $('#message').addClass('failure')
 }
 
-const onShowGameSuccess = responseData => {
-  console.log('success', responseData)
-  $('#display').html('')
-
-  const game = responseData.game
-  store.currentGameID = responseData.game.id
-  $('#display').append(`<p>Game id: ${game.id} cells: ${game.cells}
-    over: ${game.over} player_x: ${game.player_x} player_o: ${game.player_o}
-    </p><hr>`)
-  // $('#message').removeClass()
-  // $('#message').addClass('success')
-}
-
-const onShowGameFailure = responseData => {
-  console.log('failure', responseData)
-  $('#message').text('Failed to get all examples!')
-  // $('#message').addClass('failure')
-}
+// const onShowGameSuccess = responseData => {
+//   console.log('success', responseData)
+//   $('#display').html('')
+//   store.ArchivedGames.push()
+//
+//   store.game.FreshGame = new GameConstructor(
+//     responseData.game.id,
+//     responseData.game.cells,
+//     responseData.game.over,
+//     responseData.game.player_o,
+//     responseData.game.player_x
+//   )
+//   console.log(store.game.FreshGame)
+//
+//   $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
+//   cells: ${store.game.FreshGame.getCells()}
+//     over: ${store.game.FreshGame.getOver()}
+//     player_x: ${store.game.FreshGame.getPlayerX}
+//     player_o: ${store.game.FreshGame.getPlayerO}
+//     </p><hr>`)
+// }
+//
+// const onShowGameFailure = responseData => {
+//   console.log('failure', responseData)
+//   $('#message').text('Failed to get all examples!')
+//   $('#message').addClass('failure')
+// }
+// ----------------------------
+// update game
+// ---------------------------
 
 const onUpdateGameSuccess = responseData => {
   $('#display').html('')
   console.log('success', responseData)
+  console.log(store.game.FreshGame)
   const game = responseData.game
+  console.log(game.cells)
+  store.game.FreshGame.setCells(game.cells)
+  store.game.FreshGame.setId(game.id)
+  store.game.FreshGame.setOver(game.over)
 
-  $('#display').append(`<p>Game id: ${game.id} cells: ${game.cells}
-    over: ${game.over} player_x: ${game.player_x} player_o: ${game.player_o}
+  console.log(store.game.FreshGame.getLastSquareId())
+  console.log(store.game.FreshGame.getLastCellValue())
+  $(`#${store.game.FreshGame.getLastSquareId()}`).text(store.game.FreshGame.getLastCellValue())
+  $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()} cells: ${store.game.FreshGame.getCells()}
+    over: ${store.game.FreshGame.getOver()} player_x: ${store.game.FreshGame.getPlayerX()} player_o: ${store.game.FreshGame.getPlayerO()}
     </p><hr>`)
 }
 
 const onUpdateGameFailure = responseData => {
   console.log('failure', responseData)
-  $('#message').text('Failed to get all examples!')
+  $('#message').text('Failed to update game!')
   // $('#message').addClass('failure')
 }
 module.exports = {
@@ -82,8 +110,8 @@ module.exports = {
   onCreateGameFailure,
   onIndexGameSuccess,
   onIndexGameFailure,
-  onShowGameSuccess,
-  onShowGameFailure,
+  // onShowGameSuccess,
+  // onShowGameFailure,
   onUpdateGameSuccess,
   onUpdateGameFailure
 }
