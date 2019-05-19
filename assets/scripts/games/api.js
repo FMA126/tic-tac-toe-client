@@ -30,11 +30,24 @@ const onIndexGame = () => {
 
 const onShowGame = (formData) => {
   console.log('from api showGame')
-  const id = formData.games.id
+  const id = store.game.FreshGame.getId()
 
   return $.ajax({
     url: config.apiUrl + '/games/' + id,
     method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const onJoinGame = (formData) => {
+  console.log('from api showGame')
+  const id = formData.games.id
+
+  return $.ajax({
+    url: config.apiUrl + '/games/' + id,
+    method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token
     }
@@ -61,5 +74,6 @@ module.exports = {
   onCreateGame,
   onIndexGame,
   onShowGame,
-  onUpdateGame
+  onUpdateGame,
+  onJoinGame
 }

@@ -132,6 +132,20 @@ Gameboard.prototype.getWins = function () {
   return this.wins
 }
 
+Gameboard.prototype.populate = function () {
+  const gameArray = this.getCells()
+  $('.box').html('')
+  for (let i = 0; i < gameArray.length; i++) {
+    $(`#box-${i}`).text(`${gameArray[i]}`)
+  }
+}
+
+// Gameboard.prototype.watch = function () {
+//   let gameWatcher = resourceWatcher('<server>/games/:id/watch', {
+//       Authorization: 'Token token=<token>'
+// });
+// }
+
 Gameboard.prototype.isPlayerTurn = function () {
   const boxsSelected = this.cells.filter(box => box === 'x' || box === 'o')
   let whosTurn

@@ -51,36 +51,60 @@ const onIndexGameFailure = responseData => {
   // $('#message').addClass('failure')
 }
 
-// const onShowGameSuccess = responseData => {
-//   console.log('success', responseData)
-//   $('#display').html('')
-//   store.ArchivedGames.push()
-//
-//   store.game.FreshGame = new GameConstructor(
-//     responseData.game.id,
-//     responseData.game.cells,
-//     responseData.game.over,
-//     responseData.game.player_o,
-//     responseData.game.player_x
-//   )
-//   console.log(store.game.FreshGame)
-//
-//   $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
-//   cells: ${store.game.FreshGame.getCells()}
-//     over: ${store.game.FreshGame.getOver()}
-//     player_x: ${store.game.FreshGame.getPlayerX}
-//     player_o: ${store.game.FreshGame.getPlayerO}
-//     </p><hr>`)
-// }
-//
-// const onShowGameFailure = responseData => {
-//   console.log('failure', responseData)
-//   $('#message').text('Failed to get all examples!')
-//   $('#message').addClass('failure')
-// }
+const onShowGameSuccess = responseData => {
+  console.log('success', responseData)
+  $('#display').html('')
+  store.game.FreshGame.setCells(responseData.game.cells)
+  // console.log(store.game.FreshGame.getCells())
+  store.game.FreshGame.populate()
+  store.game.FreshGame.isPlayerTurn()
+  store.game.FreshGame.onWin()
+  store.game.FreshGame.isTie()
+
+
+  $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
+  cells: ${store.game.FreshGame.getCells()}
+    over: ${store.game.FreshGame.getOver()}
+    whos turn: ${store.game.FreshGame.isPlayerTurn()}
+    player_x: ${store.game.FreshGame.getPlayerX()}
+    player_o: ${store.game.FreshGame.getPlayerO()}
+    </p><hr>`)
+}
+
+const onShowGameFailure = responseData => {
+  console.log('failure', responseData)
+  $('#message').text('Failed to get a game!')
+  $('#message').addClass('failure')
+}
 // ----------------------------
 // update game
 // ---------------------------
+
+const onJoinGameSuccess = responseData => {
+  $('#display').html('')
+
+  store.game.FreshGame = new GameConstructor(
+    responseData.game.id,
+    responseData.game.cells,
+    responseData.game.over,
+    responseData.game.player_o,
+    responseData.game.player_x
+  )
+  console.log(store.game.FreshGame)
+
+  store.game.FreshGame.populate()
+
+  $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
+  cells: ${store.game.FreshGame.getCells()}
+    over: ${store.game.FreshGame.getOver()}
+    player_x: ${store.game.FreshGame.getPlayerX()}
+    player_o: ${store.game.FreshGame.getPlayerO()}
+    </p><hr>`)
+}
+
+const onJoinGameFailure = responseData => {
+  $('#display').html('')
+}
 
 const onUpdateGameSuccess = responseData => {
   $('#display').html('')
@@ -110,8 +134,10 @@ module.exports = {
   onCreateGameFailure,
   onIndexGameSuccess,
   onIndexGameFailure,
-  // onShowGameSuccess,
-  // onShowGameFailure,
+  onShowGameSuccess,
+  onShowGameFailure,
+  onJoinGameSuccess,
+  onJoinGameFailure,
   onUpdateGameSuccess,
   onUpdateGameFailure
 }

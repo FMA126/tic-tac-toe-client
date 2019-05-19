@@ -23,6 +23,7 @@ $(() => {
   // $('#box-0').on('click', gameEvents.onUpdate)
   $('#games-index').on('submit', gameEvents.onIndex)
   $('#games-show').on('submit', gameEvents.onShow)
+  $('#games-join').on('submit', gameEvents.onJoin)
   // Game play listeners
   $('#games-update').on('submit', gameEvents.onUpdate)
   $('#box-0').on('click', gameEvents.onUpdate)

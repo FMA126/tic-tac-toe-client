@@ -37,13 +37,24 @@ const onIndex = event => {
 
 const onShow = event => {
   event.preventDefault()
+  // const form = event.target
+  // const formData = getFormFields(form)
+
+  console.log('show games pressed')
+  api.onShowGame()
+    .then(ui.onShowGameSuccess)
+    .catch(ui.onShowGameFailure)
+}
+
+const onJoin = event => {
+  event.preventDefault()
   const form = event.target
   const formData = getFormFields(form)
 
   console.log('show games pressed')
-  api.onShowGame(formData)
-    .then(ui.onUpdateGameSuccess)
-    .catch(ui.onUpdateGameFailure)
+  api.onJoinGame(formData)
+    .then(ui.onJoinGameSuccess)
+    .catch(ui.onJoinGameFailure)
 }
 // -------------------------
 // update game
@@ -101,5 +112,6 @@ module.exports = {
   onIndex,
   onShow,
   onUpdate,
-  gameOver
+  gameOver,
+  onJoin
 }

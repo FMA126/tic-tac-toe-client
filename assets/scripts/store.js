@@ -1,8 +1,7 @@
 'use strict'
 
 const game = {
-  FreshGame: {},
-  ArchivedGames: []
+  FreshGame: {}
 }
 
 module.exports = {
