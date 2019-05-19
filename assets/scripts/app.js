@@ -34,4 +34,6 @@ $(() => {
   $('#box-6').on('click', gameEvents.onUpdate)
   $('#box-7').on('click', gameEvents.onUpdate)
   $('#box-8').on('click', gameEvents.onUpdate)
+  // if the modal is displayed send API that game
+  // is over
 })

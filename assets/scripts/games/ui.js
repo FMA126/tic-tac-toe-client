@@ -90,7 +90,9 @@ const onUpdateGameSuccess = responseData => {
 
   store.game.FreshGame.setCells(game.cells)
   store.game.FreshGame.setId(game.id)
-  store.game.FreshGame.setOver(game.over)
+  // store.game.FreshGame.setOver(game.over)
+  store.game.FreshGame.isTie()
+  store.game.FreshGame.onWin()
 
   $(`#${store.game.FreshGame.getLastSquareId()}`).text(store.game.FreshGame.getLastCellValue())
   $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()} cells: ${store.game.FreshGame.getCells()}
