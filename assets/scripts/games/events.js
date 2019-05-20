@@ -13,7 +13,7 @@ const onCreate = event => {
   // $('#game-board-multi').addClass('hide')
   $('#message').text('Single-Player Game')
 
-  console.log('create game pressed')
+  // console.log('create game pressed')
   api.onCreateGame()
     .then(ui.onCreateGameSuccess)
     .catch(ui.onCreateGameFailure)
@@ -42,6 +42,11 @@ const onIndex = event => {
   api.onIndexGame()
     .then(ui.onIndexGameSuccess)
     .catch(ui.onIndexGameFailure)
+}
+
+const onClearGames = () => {
+  event.preventDefault()
+  $('#display').html('')
 }
 
 const onShow = event => {
@@ -155,8 +160,7 @@ const onUpdateMulti = event => {
         .then(ui.onUpdateMultiGameSuccess)
         .catch(ui.onUpdateMultiGameFailure)
     }
-
-}
+  }
 }
 
 const gameOver = event => {
@@ -178,6 +182,7 @@ module.exports = {
   onCreate,
   onCreateMulti,
   onIndex,
+  onClearGames,
   onShow,
   onUpdateSingle,
   onUpdateMulti,

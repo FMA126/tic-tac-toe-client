@@ -6,7 +6,10 @@ const GameConstructor = gameEngine.Gameboard
 
 const onCreateGameSuccess = (responseData) => {
   // console.log('success', responseData)
-  $('#display').html('')
+  $('#message').text('')
+  // $('footer').addClass('hide')
+  $('#message').text('In Play')
+  $('#game-board-single').removeClass('visabil')
 
   store.game.FreshGame = new GameConstructor(
     responseData.game.id,
@@ -17,11 +20,11 @@ const onCreateGameSuccess = (responseData) => {
   )
   // console.log(store.game.FreshGame)
 
-  $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
-  cells: ${store.game.FreshGame.getCells()}
-    over: ${store.game.FreshGame.getOver()}
-    player_x: ${store.game.FreshGame.getPlayerXId()}
-    </p><hr>`)
+  // $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
+  // cells: ${store.game.FreshGame.getCells()}
+  //   over: ${store.game.FreshGame.getOver()}
+  //   player_x: ${store.game.FreshGame.getPlayerXId()}
+  //   </p><hr>`)
 }
 
 const onCreateGameFailure = (responseData) => {
@@ -33,7 +36,7 @@ const onCreateGameFailure = (responseData) => {
 
 const onCreateMultiGameSuccess = (responseData) => {
   // console.log('success', responseData)
-  $('#display').html('')
+  $('#message').html('')
 
   store.game.FreshGame = new GameConstructor(
     responseData.game.id,
@@ -45,11 +48,11 @@ const onCreateMultiGameSuccess = (responseData) => {
   // console.log(store.game.FreshGame)
   // store.game.FreshGame.setPreviousCells(responseData.game.cells)
   // console.log('Previous from Create', store.game.FreshGame.getPreviousCells())
-  $('#message').text('You are X')
-  $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
-  cells: ${store.game.FreshGame.getCells()}
-    over: ${store.game.FreshGame.getOver()}
-    </p><hr>`)
+  $('#message').text(`Game Number: ${store.game.FreshGame.getId()}`)
+  // $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
+  // cells: ${store.game.FreshGame.getCells()}
+  //   over: ${store.game.FreshGame.getOver()}
+  //   </p><hr>`)
 }
 
 const onCreateMultiGameFailure = (responseData) => {
@@ -65,10 +68,16 @@ const onIndexGameSuccess = responseData => {
 
   const games = responseData.games
   games.forEach(games => {
-    $('#display').append(`<p>id: ${games.id} over: ${games.over}
-      player_o: ${games.player_o} player_x: ${games.player_x.id}--
-      ${games.player_x.email}</p><hr>`)
+    $('#display').append(`<p>id: ${games.id} over: ${games.over}</p><hr>`)
   })
+  $('#display').append(`<div class="col-sm-12 col-lg-3 d-flex flex-column align-items-center justify-content-center mb-4">
+                <h2>Get All Games</h2>
+                <form id="clear-games-index">
+                  <input type="submit"
+                  class="form-control mb-2"
+                  value="Clear all games" />
+                </form>
+              </div>`)
   // $('#message').removeClass()
   // $('#message').addClass('success')
 }
@@ -82,7 +91,7 @@ const onIndexGameFailure = responseData => {
 const onShowGameSuccess = responseData => {
   // console.log('success', responseData)
   $('#display').html('')
-  $('#message').text('Watching')
+  // $('#message').text('Watching')
 
   store.game.FreshGame.setCells(responseData.game.cells)
   console.log(store.game.FreshGame.getCells())
@@ -99,18 +108,18 @@ const onShowGameSuccess = responseData => {
   // console.log('Previous Show', store.game.FreshGame.getPreviousCells())
   // console.log('Current Show', store.game.FreshGame.getCells())
 
-  $('#message').append(`<p>Game id: ${store.game.FreshGame.getId()}
-  cells: ${store.game.FreshGame.getCells()}
-    over: ${store.game.FreshGame.getOver()}
-    whos turn: ${store.game.FreshGame.isPlayerTurn()}
-    player_x: ${store.game.FreshGame.getPlayerXId()}
-    </p><hr>`)
+  // $('#message').append(`<p>Game id: ${store.game.FreshGame.getId()}
+  // cells: ${store.game.FreshGame.getCells()}
+  //   over: ${store.game.FreshGame.getOver()}
+  //   whos turn: ${store.game.FreshGame.isPlayerTurn()}
+  //   player_x: ${store.game.FreshGame.getPlayerXId()}
+  //   </p><hr>`)
 }
 
 const onShowMultiGameSuccess = responseData => {
   // console.log(responseData)
   $('#display').html('')
-  $('#message').text('Watching')
+  // $('#message').text('Watching')
 
   store.game.FreshGame.setCells(responseData.game.cells)
   store.game.FreshGame.getPreviousCells()
@@ -131,12 +140,12 @@ const onShowMultiGameSuccess = responseData => {
   if (store.game.FreshGame.isTie()) {
     $('#message').text(`Tie Game!`)
   }
-  $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
-  cells: ${store.game.FreshGame.getCells()}
-    over: ${store.game.FreshGame.getOver()}
-    whos turn: ${store.game.FreshGame.isPlayerTurn()}
-    player_x: ${store.game.FreshGame.getPlayerXId()}
-    </p><hr>`)
+  // $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
+  // cells: ${store.game.FreshGame.getCells()}
+  //   over: ${store.game.FreshGame.getOver()}
+  //   whos turn: ${store.game.FreshGame.isPlayerTurn()}
+  //   player_x: ${store.game.FreshGame.getPlayerXId()}
+  //   </p><hr>`)
 }
 
 const onShowGameFailure = responseData => {
@@ -151,6 +160,7 @@ const onShowGameFailure = responseData => {
 const onJoinGameSuccess = responseData => {
   $('#display').html('')
   $('#message').text('You are O')
+  $('form').trigger('reset')
 
   store.game.FreshGame = new GameConstructor(
     responseData.game.id,
@@ -166,19 +176,21 @@ const onJoinGameSuccess = responseData => {
 
   // store.game.FreshGame.populate()
   if (!store.game.FreshGame.getOver()) {
-    console.log('watching')
+    // console.log('watching')
     store.game.FreshGame.watch()
   }
 
-  $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
-  cells: ${store.game.FreshGame.getCells()}
-    over: ${store.game.FreshGame.getOver()}
-    player_x: ${store.game.FreshGame.getPlayerXId()}
-    </p><hr>`)
+  // $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
+  // cells: ${store.game.FreshGame.getCells()}
+  //   over: ${store.game.FreshGame.getOver()}
+  //   player_x: ${store.game.FreshGame.getPlayerXId()}
+  //   </p><hr>`)
 }
 
 const onJoinGameFailure = responseData => {
-  $('#display').html('')
+  $('#message').html('')
+  $('#message').text('Failed to Join Game!')
+  $('form').trigger('reset')
 }
 
 const onUpdateGameSuccess = responseData => {
@@ -201,9 +213,9 @@ const onUpdateGameSuccess = responseData => {
     $('#message').text(`Tie Game!`)
   }
   $(`#${store.game.FreshGame.getLastSquareId()}`).text(store.game.FreshGame.getLastCellValue())
-  $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()} cells: ${store.game.FreshGame.getCells()}
-    over: ${store.game.FreshGame.getOver()} player_x: ${store.game.FreshGame.getPlayerX()}
-    </p><hr>`)
+  // $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()} cells: ${store.game.FreshGame.getCells()}
+  //   over: ${store.game.FreshGame.getOver()} player_x: ${store.game.FreshGame.getPlayerX()}
+  //   </p><hr>`)
   // if (!store.game.FreshGame.getOver() && store.game.FreshGame.isPlayerTurn() === 'player x' &&
   //  store.game.FreshGame.getPlayerXId() !== store.user.id) {
   //   console.log('Player o Watching')
@@ -228,7 +240,7 @@ const onUpdateMultiGameSuccess = responseData => {
   store.game.FreshGame.isTie()
   store.game.FreshGame.onWinMulti(game.cells)
   if (!store.game.FreshGame.getOver()) {
-    console.log('watching')
+    // console.log('watching')
     store.game.FreshGame.watch()
   }
   // store.game.FreshGame.watch()
@@ -240,9 +252,9 @@ const onUpdateMultiGameSuccess = responseData => {
     $('#message').text(`Tie Game!`)
   }
   $(`#${store.game.FreshGame.getLastSquareId()}`).text(store.game.FreshGame.getLastCellValue())
-  $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()} cells: ${store.game.FreshGame.getCells()}
-    over: ${store.game.FreshGame.getOver()} player_x: ${store.game.FreshGame.getPlayerX()}
-    </p><hr>`)
+  // $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()} cells: ${store.game.FreshGame.getCells()}
+  //   over: ${store.game.FreshGame.getOver()} player_x: ${store.game.FreshGame.getPlayerX()}
+  //   </p><hr>`)
 }
 
 const onUpdateGameFailure = responseData => {

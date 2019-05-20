@@ -214,8 +214,8 @@ Gameboard.prototype.watch = function () {
   let i = 0
 
   function yourFunction () {
-    console.log(i)
-    console.log(store.game.FreshGame.getCells())
+    // console.log(i)
+    // console.log(store.game.FreshGame.getCells())
     i++
     if (i > 6) {
       return
@@ -234,7 +234,7 @@ Gameboard.prototype.watch = function () {
         $('#message').text('Watching')
 
         store.game.FreshGame.setCells(responseData.game.cells)
-        console.log(store.game.FreshGame.getCells())
+        // console.log(store.game.FreshGame.getCells())
         // store.game.FreshGame.getPreviousCells()
         // console.log('Current cells show', store.game.FreshGame.getCells())
         // console.log('Previous cells show', store.game.FreshGame.getPreviousCells())
@@ -248,12 +248,12 @@ Gameboard.prototype.watch = function () {
         // console.log('Previous Show', store.game.FreshGame.getPreviousCells())
         // console.log('Current Show', store.game.FreshGame.getCells())
 
-        $('#message').append(`<p>Game id: ${store.game.FreshGame.getId()}
-        cells: ${store.game.FreshGame.getCells()}
-          over: ${store.game.FreshGame.getOver()}
-          whos turn: ${store.game.FreshGame.isPlayerTurn()}
-          player_x: ${store.game.FreshGame.getPlayerXId()}
-          </p><hr>`)
+        // $('#message').append(`<p>Game id: ${store.game.FreshGame.getId()}
+        // cells: ${store.game.FreshGame.getCells()}
+        //   over: ${store.game.FreshGame.getOver()}
+        //   whos turn: ${store.game.FreshGame.isPlayerTurn()}
+        //   player_x: ${store.game.FreshGame.getPlayerXId()}
+        //   </p><hr>`)
       })
       .catch(ui.onShowMultiGameFailure)
 
@@ -309,16 +309,16 @@ Gameboard.prototype.onWin = function () {
     }
     return symbol
   }
-  console.log('cells', cells)
-  console.log(wins)
+  // console.log('cells', cells)
+  // console.log(wins)
   // Actions
 
   // iterate through each win array in constructor
   wins.forEach(path => {
     // iterate through each path cordinate
-    console.log('Looking in win path' + ' ' + path)
+    // console.log('Looking in win path' + ' ' + path)
     path.forEach(cord => {
-      console.log('Coordinate pair' + ' ' + cord)
+      // console.log('Coordinate pair' + ' ' + cord)
 
       if (route.length === 3) {
         if (allSame(route) === 'x' || allSame(route) === 'o') {
@@ -346,10 +346,10 @@ Gameboard.prototype.onWin = function () {
 
       route.push(cells[cord[0] * nXn + cord[1]])
       if (route.length === 3) {
-        console.log(route)
+        // console.log(route)
       }
       if (this.getIsWinner()) {
-        console.log('Winning player is ' + this.getIsWinner())
+        // console.log('Winning player is ' + this.getIsWinner())
       }
     })
   })
@@ -376,16 +376,16 @@ Gameboard.prototype.onWinMulti = function (cells) {
     }
     return symbol
   }
-  console.log('cells', cells)
-  console.log(wins)
+  // console.log('cells', cells)
+  // console.log(wins)
   // Actions
 
   // iterate through each win array in constructor
   wins.forEach(path => {
     // iterate through each path cordinate
-    console.log('Looking in win path' + ' ' + path)
+    // console.log('Looking in win path' + ' ' + path)
     path.forEach(cord => {
-      console.log('Coordinate pair' + ' ' + cord)
+      // console.log('Coordinate pair' + ' ' + cord)
 
       if (route.length === 3) {
         if (allSame(route) === 'x' || allSame(route) === 'o') {
@@ -437,10 +437,10 @@ Gameboard.prototype.onWinMulti = function (cells) {
 
       route.push(cells[cord[0] * nXn + cord[1]])
       if (route.length === 3) {
-        console.log(route)
+        // console.log(route)
       }
       if (this.getIsWinner()) {
-        console.log('Winning player is ' + this.getIsWinner())
+        // console.log('Winning player is ' + this.getIsWinner())
       }
     })
   })

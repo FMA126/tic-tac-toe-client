@@ -26,8 +26,9 @@ const onSignInSuccess = responseData => {
   $('form').trigger('reset')
   $('#landing').attr('class', '')
   $('#landing').addClass('hide')
-  $('footer').removeClass('hide')
+  // $('footer').removeClass('hide')
   $('#game-controls').removeClass('hide')
+  $('main').addClass('main-height-eighty')
   store.user = responseData.user
   // wait to clear and load the game board
   //  setTimeout(loadGameBoard, 2000)
@@ -48,10 +49,9 @@ const onSignOutSuccess = responseData => {
   $('#message').text('Signed out successfully!')
   // $('#message').addClass('success')
   $('#landing').removeClass('hide')
-  $('#landing').attr('class', 'd-flex justify-content-center')
   $('#game-controls').addClass('hide')
-  $('#game-board-single').addClass('hide')
-  $('#game-board-multi').addClass('hide')
+  $('#game-board-single').addClass('visabil')
+  $('#game-board-multi').addClass('visabil')
 
   $('form').trigger('reset')
 }
