@@ -4,7 +4,20 @@ const config = require('../config')
 const store = require('../store')
 
 const onCreateGame = () => {
-  console.log('from api createGame')
+  // console.log('from api createGame')
+
+  return $.ajax({
+    url: config.apiUrl + '/games',
+    method: 'POST',
+    data: {},
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const onCreateMultiGame = () => {
+  // console.log('from api createGame')
 
   return $.ajax({
     url: config.apiUrl + '/games',
@@ -17,7 +30,7 @@ const onCreateGame = () => {
 }
 
 const onIndexGame = () => {
-  console.log('from api indexGame')
+  // console.log('from api indexGame')
 
   return $.ajax({
     url: config.apiUrl + '/games',
@@ -29,7 +42,7 @@ const onIndexGame = () => {
 }
 
 const onShowGame = (formData) => {
-  console.log('from api showGame')
+  // console.log('from api showGame')
   const id = store.game.FreshGame.getId()
 
   return $.ajax({
@@ -42,7 +55,7 @@ const onShowGame = (formData) => {
 }
 
 const onJoinGame = (formData) => {
-  console.log('from api showGame')
+  // console.log('from api showGame')
   const id = formData.games.id
 
   return $.ajax({
@@ -55,8 +68,8 @@ const onJoinGame = (formData) => {
 }
 
 const onUpdateGame = (requestData) => {
-  console.log('from api updateGame')
-  console.log('form data', requestData)
+  // console.log('from api updateGame')
+  // console.log('form data', requestData)
   const id = store.game.FreshGame.getId()
   console.log('Game id from api', store.game.FreshGame.getId())
 
@@ -72,6 +85,7 @@ const onUpdateGame = (requestData) => {
 
 module.exports = {
   onCreateGame,
+  onCreateMultiGame,
   onIndexGame,
   onShowGame,
   onUpdateGame,

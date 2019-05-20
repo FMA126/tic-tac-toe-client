@@ -3,29 +3,31 @@
 const store = require('../store')
 
 const onSignUpSuccess = responseData => {
-  console.log('success', responseData)
+  // console.log('success', responseData)
   // $('#message').removeClass()
   // $('#message').text('Signed up successfully!')
-  $('#sign-in-message').text('Signed up successfully! Please sign in')
+  $('#message').text('Signed up successfully! Please sign in')
   $('form').trigger('reset')
 }
 
 const onSignUpFailure = responseData => {
-  console.log('failure', responseData)
-  $('#sign-in-message').text('Signed up failed! Please sign up again')
+  // console.log('failure', responseData)
+  $('#message').text('Signed up failed! Please sign up again')
   // $('#message').addClass('failure')
   $('form').trigger('reset')
 }
 
 const onSignInSuccess = responseData => {
-  console.log('success', responseData)
+  // console.log('success', responseData)
   // $('#message').removeClass()
-  $('#sign-in-message').text('')
-  $('#sign-in-message').text('Signed in successfully!')
+  $('#message').text('')
+  $('#message').text('Signed in successfully!')
   // $('#message').addClass('success')
   $('form').trigger('reset')
-  $('#landing').hide()
-  $('#game-board').show()
+  $('#landing').attr('class', '')
+  $('#landing').addClass('hide')
+  $('footer').removeClass('hide')
+  $('#game-controls').removeClass('hide')
   store.user = responseData.user
   // wait to clear and load the game board
   //  setTimeout(loadGameBoard, 2000)
@@ -34,31 +36,35 @@ const onSignInSuccess = responseData => {
 }
 
 const onSignInFailure = responseData => {
-  console.log('failure', responseData)
+  // console.log('failure', responseData)
   $('#message').text('Signed in failed!')
   // $('#message').addClass('failure')
   $('form').trigger('reset')
 }
 
 const onSignOutSuccess = responseData => {
-  console.log('success', responseData)
+  // console.log('success', responseData)
   // $('#message').removeClass()
   $('#message').text('Signed out successfully!')
   // $('#message').addClass('success')
-  $('#landing').show()
-  $('#game-board').hide()
+  $('#landing').removeClass('hide')
+  $('#landing').attr('class', 'd-flex justify-content-center')
+  $('#game-controls').addClass('hide')
+  $('#game-board-single').addClass('hide')
+  $('#game-board-multi').addClass('hide')
+
   $('form').trigger('reset')
 }
 
 const onSignOutFailure = responseData => {
-  console.log('failure', responseData)
+  // console.log('failure', responseData)
   $('#message').text('Signed out failed!')
   // $('#message').addClass('failure')
   $('form').trigger('reset')
 }
 
 const onChangePasswordSuccess = () => {
-  console.log('success')
+  // console.log('success')
   // $('#message').removeClass()
   $('#message').text('Changed password successfully!')
   // $('#message').addClass('success')
@@ -66,7 +72,7 @@ const onChangePasswordSuccess = () => {
 }
 
 const onChangePasswordFailure = responseData => {
-  console.log('failure')
+  // console.log('failure')
   $('#message').text('Change password failed!')
   // $('#message').addClass('failure')
   $('form').trigger('reset')

@@ -1,19 +1,63 @@
 @import '~bootstrap/scss/bootstrap';
 
-$square: #7d8e72;
+$highlight: hsl(236, 32%, 36%);
+$square: hsl(236, 32%, 26%);
+$darkbackground: #16161d;
+$deeppurp: hsl(243, 60%, 8%);
+$marker-o: #3cefff;
+$text: #ffffff;
 
+body {
+  background: $deeppurp;
+}
 
-.game-board {
-  display: dispay;
+html {
+  color: $text;
+}
 
+header {
+  background: $deeppurp;
+  color: $text;
+  height: 10vh;
+
+  p {
+    font-size: 40px;
+  }
+}
+
+input {
+  background: $square;
+  color: $text;
+}
+
+main {
+  background: $deeppurp;
+  color: $text;
+}
+
+.banner {
+  background: $highlight;
+  height: 10vh;
 }
 
 .box {
   background: $square;
-  height: 100px;
-  width: 100px;
+  height: 33%;
+  :hover {
+    background: $highlight;
+  }
+}
+
+.game-board {
+  height: 60vh;
+  width: 60vh;
+  margin: auto;
 }
 
 .hide {
   display: none;
+}
+
+.message-banner {
+  color: $text;
 }

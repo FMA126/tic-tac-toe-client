@@ -12,51 +12,58 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <header class="col-12">
-        <h1>Tic Tac Toe</h1>
+      <header class="container-fluid d-flex align-items-center">
+        <div class="col-12 container d-flex align-items-center">
+        <p class="col-12">Tic Tac Toe</p>
+        </div>
+
       </header>
-
-      <h3 id="message"></h3>
+      <div class="col-12 container banner mb-4">
+        <div class="row d-flex justify-content-center align-items-center">
+      <h3 class="message-banner" id="message"></h3>
+        </div>
+      </div>
       <main>
-        <section id="landing">
-
-          <div class="container">
-
+        <section class="d-flex justify-content-center" id="landing">
+          <div class="row">
+          <div class="col-sm-12 col-lg-4 container d-flex flex-column justify-content-center align-items-center mb-4">
             <h2>Sign Up</h2>
-            <form id="sign-up">
-              <input type="email"
-              name="credentials[email]"
-              placeholder="Email"/>
-              <input type="password"
-              name="credentials[password]"
-              placeholder="Password"/>
-              <input type="password"
-              name="credentials[password_confirmation]"
-              placeholder="Confirm password"/>
-              <input class="btn btn-primary"
-              type="submit"
-              value="Sign Up"/>
-            </form>
+
+              <form id="sign-up">
+                <input type="email"
+                class="form-control mb-2"
+                name="credentials[email]"
+                placeholder="Email"/>
+                <input type="password"
+                class="form-control mb-2"
+                name="credentials[password]"
+                placeholder="Password"/>
+                <input type="password"
+                class="form-control mb-2"
+                name="credentials[password_confirmation]"
+                placeholder="Confirm password"/>
+                <input class="btn btn-primary"
+                type="submit"
+                value="Sign Up"/>
+              </form>
 
           </div>
 
-          <div class="container">
-            <div class="row">
-              <p class="col-12">
-                --OR--
-              </p>
-              <p id="sign-in-message"></p>
+          <div class="col-sm-12 col-lg-4 container d-flex justify-content-center align-items-center mb-4">
+            <div class="row">--OR--
             </div>
           </div>
 
-          <div class="container">
+          <div class="col-sm-12 col-lg-4 container d-flex flex-column justify-content-center align-items-center mb-4">
 
             <h2>Sign In</h2>
             <form id="sign-in">
               <input type="email"
+              class="form-control mb-2"
               name="credentials[email]"
               placeholder="Email"/>
               <input type="password"
+              class="form-control mb-2"
               name="credentials[password]"
               placeholder="Password"/>
               <input class="btn btn-primary"
@@ -64,6 +71,7 @@
               value="Sign In"/>
             </form>
           </div>
+        </div>
         </section>
 
       <!-- Game Board -->
@@ -72,52 +80,85 @@
         <div id="display"></div>
       </section>
 
-        <section id="game-board" class="game-board">
-          <form class="container">
-            <div class="d-flex justify-content-between mb-2">
+        <section id="game-board-single" class="game-board row hide">
+
+
               <div id="box-0"
-              class="col-3 box"
+              class="col-4 box"
               data-box-num="0"></div>
               <div id="box-1"
-              class="col-3 box"
+              class="col-4 box"
               data-box-num="1"></div>
               <div id="box-2"
-              class="col-3 box"
+              class="col-4 box"
               data-box-num="2"></div>
-            </div>
-            <div class="d-flex justify-content-between mb-2">
+
+
               <div id="box-3"
-              class="col-3 box"
+              class="col-4 box"
               data-box-num="3"></div>
               <div id="box-4"
-              class="col-3 box"
+              class="col-4 box"
               data-box-num="4"></div>
               <div id="box-5"
-              class="col-3 box"
+              class="col-4 box"
               data-box-num="5"></div>
-            </div>
-            <div class="d-flex justify-content-between mb-2">
+
+
               <div id="box-6"
-              class="col-3 box"
+              class="col-4 box"
               data-box-num="6"></div>
               <div id="box-7"
-              class="col-3 box"
+              class="col-4 box"
               data-box-num="7"></div>
               <div id="box-8"
-              class="col-3 box"
+              class="col-4 box"
               data-box-num="8"></div>
-            </div>
-          </form>
 
-          <!-- Game Controls -->
 
+        </section>
+
+        <section id="game-board-multi" class="game-board row hide">
+
+              <div id="box-0-m"
+              class="col-4 box"
+              data-box-num="0"></div>
+              <div id="box-1-m"
+              class="col-4 box"
+              data-box-num="1"></div>
+              <div id="box-2-m"
+              class="col-4 box"
+              data-box-num="2"></div>
+
+              <div id="box-3-m"
+              class="col-4 box"
+              data-box-num="3"></div>
+              <div id="box-4-m"
+              class="col-4 box"
+              data-box-num="4"></div>
+              <div id="box-5-m"
+              class="col-4 box"
+              data-box-num="5"></div>
+
+              <div id="box-6-m"
+              class="col-4 box"
+              data-box-num="6"></div>
+              <div id="box-7-m"
+              class="col-4 box"
+              data-box-num="7"></div>
+              <div id="box-8-m"
+              class="col-4 box"
+              data-box-num="8"></div>
+        </section>
+        <!-- Game Controls -->
+        <section id="game-controls" class="container hide">
           <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
   Launch demo modal
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -135,15 +176,21 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
           <div class="container">
             <h3 id="message-games"></h3>
 
-            <h2>Create Game</h2>
+            <h2>Play Game</h2>
             <form id="games-create">
               <input type="submit"
-              value="Create A Game" />
+              value="Play Game" />
+            </form>
+
+            <h2>Multiplayer Game</h2>
+            <form id="games-create-multi">
+              <input type="submit"
+              value="New Game" />
             </form>
 
             <h2>Get All Games</h2>
@@ -184,7 +231,7 @@
 
           <!-- Auth controls: sign-out change password -->
 
-          <div class="container">
+          <!-- <div class="container">
             <h2>Sign Out</h2>
             <form id="sign-out">
               <input class="btn btn-primary"
@@ -204,10 +251,36 @@
               type="submit"
               value="Change Password"/>
             </form>
-          </div>
+          </div> -->
 
         </section>
 
       </main>
+      <footer class="hide">
+        <div class="row d-flex align-items-center">
+          <div class="col-sm-12 col-lg-8 input-group-sm mb-4" id="ch-pw-wrapper">
+            <form class="d-flex" id="change-password">
+              <input type="password"
+              class="form-control ml-2"
+              name="passwords[old]"
+              placeholder="Old Password"/>
+              <input type="password"
+              class="form-control ml-2"
+              name="passwords[new]"
+              placeholder="New Password"/>
+              <input class="btn btn-primary ml-2"
+              type="submit"
+              value="Change Password"/>
+            </form>
+          </div>
+          <div class="col-sm-12 col-lg-4 d-flex justify-content-center mb-4">
+          <form id="sign-out">
+            <input class="btn btn-primary"
+            type="submit"
+            value="Sign Out" />
+          </form>
+        </div>
+        </div>
+      </footer>
     </body>
 </html>

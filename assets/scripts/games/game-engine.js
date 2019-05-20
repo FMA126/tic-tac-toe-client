@@ -2,6 +2,8 @@
 
 const config = require('../config')
 const store = require('../store')
+const api = require('./api')
+const ui = require('./ui')
 
 // User stories:
 // 1. Game board is empty after creating new game
@@ -44,6 +46,9 @@ const Gameboard = function (
   this.playerO = playerO
   this.playerX = playerX
   this.isWinner = ''
+  this.i = 0
+  // last index of array is to fix bug where it times out before it can read
+  // the diagonal
   this.wins = [
     [[0, 0], [0, 1], [0, 2]],
     [[1, 0], [1, 1], [1, 2]],
@@ -52,7 +57,8 @@ const Gameboard = function (
     [[0, 1], [1, 1], [2, 1]],
     [[0, 2], [1, 2], [2, 2]],
     [[0, 0], [1, 1], [2, 2]],
-    [[0, 2], [1, 1], [2, 0]]
+    [[0, 2], [1, 1], [2, 0]],
+    [[0, 0], [0, 1], [1, 0]]
   ]
 }
 
@@ -70,6 +76,22 @@ Gameboard.prototype.getCells = function () {
 
 Gameboard.prototype.setCells = function (cellArray) {
   this.cells = cellArray
+}
+
+Gameboard.prototype.getI = function () {
+  return this.i
+}
+
+Gameboard.prototype.setI = function (num) {
+  this.i = num
+}
+
+Gameboard.prototype.getPreviousCells = function () {
+  return this.previousCells
+}
+
+Gameboard.prototype.setPreviousCells = function (cellArray) {
+  this.previousCells = cellArray
 }
 
 Gameboard.prototype.getLastCellIndex = function () {
@@ -104,12 +126,20 @@ Gameboard.prototype.setLastSquareId = function (squareId) {
   this.lastSquare = squareId
 }
 
+Gameboard.prototype.getPlayerOId = function () {
+  return this.playerO.id
+}
+
 Gameboard.prototype.getPlayerO = function () {
   return this.playerO
 }
 
-Gameboard.prototype.setPlayerO = function (playerX) {
-  this.playerX = playerX
+Gameboard.prototype.setPlayerO = function (playerO) {
+  this.playerO = playerO
+}
+
+Gameboard.prototype.getPlayerXId = function () {
+  return this.playerX.id
 }
 
 Gameboard.prototype.getPlayerX = function () {
@@ -132,11 +162,32 @@ Gameboard.prototype.getWins = function () {
   return this.wins
 }
 
+Gameboard.prototype.getDiffValue = function () {
+  return this.diffValue
+}
+
+Gameboard.prototype.setDiffValue = function (val) {
+  this.diffValue = val
+}
+
+Gameboard.prototype.diffValueCells = function (current, previous) {
+  // console.log('Previous from diff', this.getPreviousCells())
+  // console.log('Current from diff', this.getCells())
+  // const prevCells = this.getPreviousCells()
+  // const cells = this.getCells()
+
+  previous.forEach((el, index) => {
+    if (el !== current[index]) {
+      this.setDiffValue(current[index])
+    }
+  })
+}
+
 Gameboard.prototype.populate = function () {
   const gameArray = this.getCells()
   $('.box').html('')
   for (let i = 0; i < gameArray.length; i++) {
-    $(`#box-${i}`).text(`${gameArray[i]}`)
+    $(`#box-${i}-m`).text(`${gameArray[i]}`)
   }
 }
 
@@ -147,7 +198,7 @@ Gameboard.prototype.populate = function () {
 // }
 
 Gameboard.prototype.isPlayerTurn = function () {
-  const boxsSelected = this.cells.filter(box => box === 'x' || box === 'o')
+  const boxsSelected = this.getCells().filter(box => box === 'x' || box === 'o')
   let whosTurn
 
   if (boxsSelected.length % 2 === 0) {
@@ -156,6 +207,59 @@ Gameboard.prototype.isPlayerTurn = function () {
     whosTurn = 'player o'
   }
   return whosTurn
+}
+
+Gameboard.prototype.watch = function () {
+  // do whatever you like here
+  let i = 0
+
+  function yourFunction () {
+    console.log(i)
+    console.log(store.game.FreshGame.getCells())
+    i++
+    if (i > 6) {
+      return
+    } else if (store.game.FreshGame.isPlayerTurn() === 'player o' &&
+     store.game.FreshGame.getPlayerOId() === store.user.id) {
+      return
+    } else if (store.game.FreshGame.isPlayerTurn() === 'player x' &&
+     store.game.FreshGame.getPlayerXId() === store.user.id) {
+      return
+    }
+    api.onShowGame()
+      // .then(ui.onShowMultiGameSuccess)
+      .then((responseData) => {
+        // console.log('success', responseData)
+        $('#display').html('')
+        $('#message').text('Watching')
+
+        store.game.FreshGame.setCells(responseData.game.cells)
+        console.log(store.game.FreshGame.getCells())
+        // store.game.FreshGame.getPreviousCells()
+        // console.log('Current cells show', store.game.FreshGame.getCells())
+        // console.log('Previous cells show', store.game.FreshGame.getPreviousCells())
+        store.game.FreshGame.populate()
+        store.game.FreshGame.isPlayerTurn()
+        // store.game.FreshGame.diffValueCells(store.game.FreshGame.getCells(), store.game.FreshGame.getPreviousCells())
+        // console.log(store.game.FreshGame.getDiffValue())
+        store.game.FreshGame.onWin()
+        store.game.FreshGame.isTie()
+
+        // console.log('Previous Show', store.game.FreshGame.getPreviousCells())
+        // console.log('Current Show', store.game.FreshGame.getCells())
+
+        $('#message').append(`<p>Game id: ${store.game.FreshGame.getId()}
+        cells: ${store.game.FreshGame.getCells()}
+          over: ${store.game.FreshGame.getOver()}
+          whos turn: ${store.game.FreshGame.isPlayerTurn()}
+          player_x: ${store.game.FreshGame.getPlayerXId()}
+          </p><hr>`)
+      })
+      .catch(ui.onShowMultiGameFailure)
+
+    setTimeout(yourFunction, 5000)
+  }
+  yourFunction()
 }
 
 Gameboard.prototype.isTie = function () {
@@ -236,6 +340,97 @@ Gameboard.prototype.onWin = function () {
               Authorization: 'Token token=' + store.user.token
             }
           })
+        }
+        route.splice(0, 3)
+      }
+
+      route.push(cells[cord[0] * nXn + cord[1]])
+      if (route.length === 3) {
+        console.log(route)
+      }
+      if (this.getIsWinner()) {
+        console.log('Winning player is ' + this.getIsWinner())
+      }
+    })
+  })
+}
+
+Gameboard.prototype.onWinMulti = function (cells) {
+  // variables
+  const route = []
+  const nXn = 3
+  // const cells = this.getCells()
+  const wins = this.getWins()
+  // const lastValue = this.getLastCellValue()
+
+  // check if win path is populated with x's or o's
+  const allSame = function (connect) {
+    let symbol
+    const allX = connect.every(el => el === 'x')
+    const allO = connect.every(el => el === 'o')
+
+    if (allX) {
+      symbol = 'x'
+    } else if (allO) {
+      symbol = 'o'
+    }
+    return symbol
+  }
+  console.log('cells', cells)
+  console.log(wins)
+  // Actions
+
+  // iterate through each win array in constructor
+  wins.forEach(path => {
+    // iterate through each path cordinate
+    console.log('Looking in win path' + ' ' + path)
+    path.forEach(cord => {
+      console.log('Coordinate pair' + ' ' + cord)
+
+      if (route.length === 3) {
+        if (allSame(route) === 'x' || allSame(route) === 'o') {
+          const xs = cells.filter((el) => el === 'x')
+          const os = cells.filter((el) => el === 'o')
+          const xando = xs.concat(os)
+          if (xando.length % 2 === 0) {
+            this.setIsWinner(`Player o`)
+            this.setOver(true)
+            $.ajax({
+              url: config.apiUrl + '/games/' + this.getId(),
+              method: 'PATCH',
+              data: {
+                'game': {
+                  'cell': {
+                    'index': this.getLastCellIndex(),
+                    'value': this.getLastCellValue()
+                  },
+                  'over': this.getOver()
+                }
+              },
+              headers: {
+                Authorization: 'Token token=' + store.user.token
+              }
+            })
+          } else {
+            this.setIsWinner(`Player x`)
+            this.setOver(true)
+            $.ajax({
+              url: config.apiUrl + '/games/' + this.getId(),
+              method: 'PATCH',
+              data: {
+                'game': {
+                  'cell': {
+                    'index': this.getLastCellIndex(),
+                    'value': this.getLastCellValue()
+                  },
+                  'over': this.getOver()
+                }
+              },
+              headers: {
+                Authorization: 'Token token=' + store.user.token
+              }
+            })
+          }
         }
         route.splice(0, 3)
       }
