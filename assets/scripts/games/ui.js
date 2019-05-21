@@ -48,7 +48,8 @@ const onCreateMultiGameSuccess = (responseData) => {
   // console.log(store.game.FreshGame)
   // store.game.FreshGame.setPreviousCells(responseData.game.cells)
   // console.log('Previous from Create', store.game.FreshGame.getPreviousCells())
-  $('#message').text(`Game Number: ${store.game.FreshGame.getId()}`)
+  $('#message').text(`Game Number: ${store.game.FreshGame.getId()}. Have your
+  friend enter this number to join the game.`)
   // $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
   // cells: ${store.game.FreshGame.getCells()}
   //   over: ${store.game.FreshGame.getOver()}

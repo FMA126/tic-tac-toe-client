@@ -46,7 +46,7 @@ const onIndex = event => {
 
 const onClearGames = () => {
   event.preventDefault()
-  $('#display').html('')
+  $('#display').addClass('hide')
 }
 
 const onShow = event => {
