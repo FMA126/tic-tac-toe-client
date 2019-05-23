@@ -9,8 +9,8 @@ const ui = require('./ui')
 const onCreate = event => {
   event.preventDefault()
   $('.box').html('')
-  $('#game-board-single').removeClass('hide')
   // $('#game-board-multi').addClass('hide')
+  $('#game-board-single').removeClass('hide')
   $('#message').text('Single-Player Game')
 
   // console.log('create game pressed')
