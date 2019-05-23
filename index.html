@@ -31,9 +31,9 @@
 
       </header>
 
-      <div class="col-12 container banner">
-        <div class="row d-flex justify-content-center align-items-center">
-      <h3 class="message-banner" id="message"></h3>
+      <div class="col-12 container d-flex justify-content-center align-items-center banner">
+        <div class="row">
+          <h3 class="message-banner" id="message"></h3>
         </div>
       </div>
 
@@ -92,7 +92,9 @@
 
         </section>
         <!-- Game Board -->
-        <section id="game-board-single" class="game-board row hide">
+        <section class="d-flex justify-content-center align-items center hide"
+        id="game-board-section" >
+          <div class="game-board row" id="game-board-single">
 
 
               <div id="box-0"
@@ -127,7 +129,7 @@
               class="col-4 box"
               data-box-num="8"></div>
 
-
+          </div>
         </section>
 
         <section id="game-board-multi" class="game-board row hide">

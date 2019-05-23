@@ -6,6 +6,10 @@ const GameConstructor = gameEngine.Gameboard
 
 const onCreateGameSuccess = (responseData) => {
   // console.log('success', responseData)
+  $('.box').html('')
+  // $('#game-board-multi').addClass('hide')
+  $('#game-board-single').removeClass('hide')
+  $('#message').text('Single-Player Game')
   $('#message').text('')
   // $('footer').addClass('hide')
   $('#message').text('In Play')
