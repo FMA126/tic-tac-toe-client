@@ -7,6 +7,8 @@ $deeppurp: hsl(243, 60%, 8%);
 $marker-o: #3cefff;
 $text: #ffffff;
 $hotrod: #fc2f70;
+$finetext: #5b7a72;
+$alert: #ff2600;
 
 body {
   background: $deeppurp;
@@ -29,12 +31,17 @@ header {
   z-index: 20;
 }
 
-// footer {
-//   background: $deeppurp;
-//   z-index: 30;
-//   border-top: 2px solid $hotrod;
-//   padding-top: 20px;
-// }
+footer {
+  background: $highlight;
+  color: $text;
+  z-index: 30;
+  border-top: 2px solid $marker-o;
+  padding-top: 20px;
+}
+
+.attention {
+  color: $alert !important;
+}
 
 input {
   background: $square;
@@ -50,12 +57,13 @@ section {
   height: 80vh;
 }
 
+
 .banner {
   background: $highlight;
   height: 10vh;
   position: sticky;
   top: 10vh;
-  border-top: 1px solid $hotrod;
+  border-top: 1px solid $text;
   border-bottom: 1px solid $hotrod;
   z-index: 20;
 }
@@ -65,7 +73,7 @@ section {
   justify-content: center;
   align-items: center;
   background: $square;
-  border: 2px solid #3cefff;
+  border: 2px solid $marker-o;
   height: 33%;
   font-size: 2rem;
 }
@@ -81,8 +89,15 @@ section {
   margin: auto;
 }
 
+#github-icon {
+
+  i {
+    color: $text;
+  }
+}
+
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .visabil {
@@ -121,6 +136,7 @@ h1:hover::before, h1:hover::after {
   transform: scaleX(1);
 }
 .dots {
+  background-color: $deeppurp;
   width: 3em;
   height: 3em;
   display: grid;
@@ -133,7 +149,7 @@ h1:hover::before, h1:hover::after {
 .dots > div {
   width: 0.5em;
   height: 0.5em;
-  background-color: #3cefff;
+  background-color: $marker-o;
   border-radius: 50%;
   animation: fade 1.5s alternate ease-in-out infinite;
 }
@@ -174,7 +190,7 @@ h2::before, h2::after {
   top: 0;
   bottom: 0;
   width: 2px;
-  background-color: #fc2f70;
+  background-color: $hotrod;
   transform: scaleY(0);
   transition: transform 0.5s ease;
 }

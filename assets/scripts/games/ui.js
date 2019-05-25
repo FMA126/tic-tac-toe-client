@@ -8,12 +8,14 @@ const onCreateGameSuccess = (responseData) => {
   // console.log('success', responseData)
   $('.box').html('')
   // $('#game-board-multi').addClass('hide')
-  $('#game-board-single').removeClass('hide')
+  $(window).scrollTop(0)
   $('#message').text('Single-Player Game')
   $('#message').text('')
   // $('footer').addClass('hide')
   $('#message').text('In Play')
-  $('#game-board-single').removeClass('visabil')
+  $('#game-board-section').removeClass('hide')
+  $('#game-board-single').removeClass('hide')
+  $('#game-board-multi').addClass('hide')
 
   store.game.FreshGame = new GameConstructor(
     responseData.game.id,
@@ -41,6 +43,9 @@ const onCreateGameFailure = (responseData) => {
 const onCreateMultiGameSuccess = (responseData) => {
   // console.log('success', responseData)
   $('#message').html('')
+  $(window).scrollTop(0)
+  $('#game-board-single').addClass('hide')
+  $('#game-board-multi').removeClass('hide')
 
   store.game.FreshGame = new GameConstructor(
     responseData.game.id,
@@ -164,6 +169,7 @@ const onShowGameFailure = responseData => {
 
 const onJoinGameSuccess = responseData => {
   $('#display').html('')
+  $(window).scrollTop(0)
   $('#message').text('You are O')
   $('form').trigger('reset')
 

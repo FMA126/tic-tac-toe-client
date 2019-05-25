@@ -3,17 +3,39 @@
 const getFormFields = require('../../../lib/get-form-fields.js')
 const api = require('./api')
 const ui = require('./ui')
+const store = require('../store')
+
+const onAutoSignIn = (email, password) => {
+  const reqObj = {
+    'credentials': {
+      'email': email,
+      'password': password
+    }
+  }
+  api.signIn(reqObj)
+    .then(ui.onSignInSuccess)
+    .catch(ui.onSignInFailure)
+}
 
 const onSignUp = event => {
   event.preventDefault()
-
   const form = event.target
   const formData = getFormFields(form)
+  console.log(formData)
 
   // console.log('sign up pressed', formData)
   api.signUp(formData)
     .then(ui.onSignUpSuccess)
     .catch(ui.onSignUpFailure)
+    .then(() => {
+      if (store.signUpPassed) {
+        onAutoSignIn(formData.credentials.email, formData.credentials.password)
+      }
+    })
+}
+
+const onSwitchSignInUp = () => {
+  ui.switchSignInUp()
 }
 
 const onSignIn = event => {
@@ -25,7 +47,7 @@ const onSignIn = event => {
   // console.log('sign in pressed', formData)
   api.signIn(formData)
     .then(ui.onSignInSuccess)
-    .catch(ui.onSignUpFailure)
+    .catch(ui.onSignInFailure)
 }
 
 const onSignOut = event => {
@@ -39,6 +61,7 @@ const onSignOut = event => {
 
 const onChangePassword = event => {
   event.preventDefault()
+  // console.log('Hi from event change password')
 
   const form = event.target
   const formData = getFormFields(form)
@@ -50,6 +73,8 @@ const onChangePassword = event => {
 }
 
 module.exports = {
+  onSwitchSignInUp,
+  onAutoSignIn,
   onSignUp,
   onSignIn,
   onSignOut,

@@ -11,12 +11,14 @@ const gameEvents = require('./games/events')
 $(() => {
   // your JS code goes here
   // Sign in listeners
+  $('#sign-up-link').on('click', authEvents.onSwitchSignInUp)
+  $('#back-sign-in').on('click', authEvents.onSwitchSignInUp)
   $('#sign-up').on('submit', authEvents.onSignUp)
   $('#sign-in').on('submit', authEvents.onSignIn)
   // create game on sign in
   // setTimeout(() => $('#sign-in').on('submit', gameEvents.onCreate), 1000)
   // create game on sign in
-  $('#sign-out').on('submit', authEvents.onSignOut)
+  $('#sign-out').on('click', authEvents.onSignOut)
   $('#change-password').on('submit', authEvents.onChangePassword)
   // Game control listeners
   $('#games-create').on('submit', gameEvents.onCreate)

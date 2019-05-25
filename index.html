@@ -3,7 +3,7 @@
     <head>
       <title>Tic Tac Toe</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
-
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
       <!-- Do not add `link` tags-->
       <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
@@ -12,12 +12,45 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+              <form id="change-password">
+                <div class="form-group">
+                  <label for="currentPassword">Current Password</label>
+                  <input type="password" class="form-control"
+                  name="passwords[old]" id="currentPassword" placeholder="Old Password">
+                </div>
+                <div class="form-group">
+                  <label for="newPassword">New Password</label>
+                  <input type="password" class="form-control"
+                  name="passwords[new]"
+                  id="newPassword" placeholder="New Password">
+                </div>
+                <button type="submit" class="btn btn-secondary">Change Password</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button id="sign-out" type="button" class="btn btn-primary"
+              data-dismiss="modal">Sign Out</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <header class="container-fluid d-flex align-items-center
       justify-content-between">
 
           <h1>Tic Tac Toe</h1>
-          <div class="dots">
+          <div class="dots" type="button" data-toggle="modal" data-target="#exampleModal">
             <div></div>
             <div></div>
             <div></div>
@@ -39,316 +72,233 @@
 
       <main>
 
-        <section class="landing-auth d-flex justify-content-center" id="landing">
+        <section class="landing-auth d-flex flex-column justify-content-center
+        align-items-center" id="landing-auth">
 
-          <div class="row">
-            <div class="col-sm-12 col-lg-4 container d-flex flex-column
-            justify-content-center align-items-center">
-              <h2>Sign Up</h2>
-                <form class="d-flex
-                flex-column justify-content-center align-items-center" id="sign-up">
-                  <input type="email"
-                  class="form-control mb-2"
-                  name="credentials[email]"
-                  placeholder="Email"/>
-                  <input type="password"
-                  class="form-control mb-2"
-                  name="credentials[password]"
-                  placeholder="Password"/>
-                  <input type="password"
-                  class="form-control mb-2"
+          <div class="container mb-4">
+
+              <form class="hide" id="sign-up">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control"
+                  name="credentials[email]" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" placeholder="Enter email">
+                  <small id="emailHelp1" class="form-text text-muted">
+                  We'll never share your email with anyone else.
+                </small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" name="credentials[password]" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword2">Confirm Password</label>
+                  <input type="password" class="form-control"
                   name="credentials[password_confirmation]"
-                  placeholder="Confirm password"/>
-                  <input class="btn btn-outline-light"
-                  type="submit"
-                  value="Sign Up"/>
-                </form>
-          </div>
+                  id="exampleInputPassword2" placeholder="Password">
+                </div>
 
-          <div class="col-sm-12 col-lg-4 container d-flex
-          justify-content-center align-items-center">
-            <div class="row">--OR--</div>
-          </div>
-
-          <div class="col-sm-12 col-lg-4 container d-flex
-          flex-column justify-content-center align-items-center">
-            <h2>Sign In</h2>
-              <form class="d-flex
-              flex-column justify-content-center align-items-center" id="sign-in">
-                <input type="email"
-                class="form-control mb-2"
-                name="credentials[email]"
-                placeholder="Email"/>
-                <input type="password"
-                class="form-control mb-2"
-                name="credentials[password]"
-                placeholder="Password"/>
-                <input class="btn btn-outline-light"
-                type="submit"
-                value="Sign In"/>
+                <button type="submit" class="btn btn-primary">Submit</button>
               </form>
+
+              <form id="sign-in">
+                <div class="form-group">
+                  <label for="exampleInputEmail2">Email address</label>
+                  <input type="email" class="form-control"
+                  name="credentials[email]" id="exampleInputEmail2"
+                  aria-describedby="emailHelp" placeholder="Enter email">
+                  <small id="emailHelp2" class="form-text text-muted">
+                    We'll never share your email with anyone else.
+                  </small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword3">Password</label>
+                  <input type="password" class="form-control"
+                  name="credentials[password]"
+                  id="exampleInputPassword3" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
           </div>
-        </div>
+          <div class="container">
+            <a id="sign-up-link" class="text-decoration-none" href="#">Not a member?</a>
+            <a id="back-sign-in" class="hide text-decoration-none" href="#">Sign in</a>
+          </div>
+        <!-- </div> -->
 
         </section>
         <!-- Game Board -->
-        <section class="d-flex justify-content-center align-items center hide"
-        id="game-board-section" >
-          <div class="game-board row" id="game-board-single">
+        <div class="row">
+          <section id="game-controls" class="col-sm-12 col-lg-3 d-flex
+          justify-content-center align-items-center hide">
 
+            <div class="row d-flex justify-content-center">
+              <h3 id="message-games"></h3>
+              <div class="col-12 d-flex flex-column
+              align-items-center justify-content-center mb-4">
+                <h2>Play Alone</h2>
+                <form id="games-create">
+                  <input type="submit"
+                  class="form-control mb-2"
+                  value="New Game" />
+                </form>
+              </div>
+              <div class="col-12 d-flex flex-column
+              align-items-center justify-content-center mb-4">
+                <h2>Play A Friend</h2>
+                <form id="games-create-multi">
+                  <input type="submit"
+                  class="form-control mb-2"
+                  value="New Game" />
+                </form>
+              </div>
+              <div class="col-12 d-flex flex-column
+              align-items-center justify-content-center mb-4">
+                <h2>Get All Games</h2>
+                <form id="games-index">
+                  <input type="submit"
+                  class="form-control mb-2"
+                  value="Get all games" />
+                </form>
+              </div>
+              <div class="col-12 d-flex flex-column
+              align-items-center justify-content-center mb-4">
+                <!-- <h2>Join A Game</h2> -->
+                <form id="games-join">
 
-              <div id="box-0"
-              class="col-4 box"
-              data-box-num="0"></div>
-              <div id="box-1"
-              class="col-4 box"
-              data-box-num="1"></div>
-              <div id="box-2"
-              class="col-4 box"
-              data-box-num="2"></div>
+                  <div class="input-group">
+                    <input type="number"
+                    class="form-control"
+                    name="games[id]"
+                    placeholder="Number" />
+                    <div class="input-group-append">
+                      <input type="submit"
+                      class="btn btn-danger"
+                      value="Join a Game" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+        </div>
 
+          </section>
+          <section class="col-sm-12 col-lg-6 d-flex justify-content-center align-items-center"
+          id="game-board-section" >
+            <div class="game-board row" id="game-board-single">
+                <div id="box-0"
+                class="col-4 box"
+                data-box-num="0"></div>
+                <div id="box-1"
+                class="col-4 box"
+                data-box-num="1"></div>
+                <div id="box-2"
+                class="col-4 box"
+                data-box-num="2"></div>
 
-              <div id="box-3"
-              class="col-4 box"
-              data-box-num="3"></div>
-              <div id="box-4"
-              class="col-4 box"
-              data-box-num="4"></div>
-              <div id="box-5"
-              class="col-4 box"
-              data-box-num="5"></div>
+                <div id="box-3"
+                class="col-4 box"
+                data-box-num="3"></div>
+                <div id="box-4"
+                class="col-4 box"
+                data-box-num="4"></div>
+                <div id="box-5"
+                class="col-4 box"
+                data-box-num="5"></div>
 
+                <div id="box-6"
+                class="col-4 box"
+                data-box-num="6"></div>
+                <div id="box-7"
+                class="col-4 box"
+                data-box-num="7"></div>
+                <div id="box-8"
+                class="col-4 box"
+                data-box-num="8"></div>
+            </div>
 
-              <div id="box-6"
-              class="col-4 box"
-              data-box-num="6"></div>
-              <div id="box-7"
-              class="col-4 box"
-              data-box-num="7"></div>
-              <div id="box-8"
-              class="col-4 box"
-              data-box-num="8"></div>
+            <div class="game-board row hide" id="game-board-multi">
+                <div id="box-0-m"
+                class="col-4 box"
+                data-box-num="0"></div>
+                <div id="box-1-m"
+                class="col-4 box"
+                data-box-num="1"></div>
+                <div id="box-2-m"
+                class="col-4 box"
+                data-box-num="2"></div>
 
-          </div>
-        </section>
+                <div id="box-3-m"
+                class="col-4 box"
+                data-box-num="3"></div>
+                <div id="box-4-m"
+                class="col-4 box"
+                data-box-num="4"></div>
+                <div id="box-5-m"
+                class="col-4 box"
+                data-box-num="5"></div>
 
-        <section id="game-board-multi" class="game-board row hide">
+                <div id="box-6-m"
+                class="col-4 box"
+                data-box-num="6"></div>
+                <div id="box-7-m"
+                class="col-4 box"
+                data-box-num="7"></div>
+                <div id="box-8-m"
+                class="col-4 box"
+                data-box-num="8"></div>
+              </div>
+          </section>
 
-              <div id="box-0-m"
-              class="col-4 box"
-              data-box-num="0"></div>
-              <div id="box-1-m"
-              class="col-4 box"
-              data-box-num="1"></div>
-              <div id="box-2-m"
-              class="col-4 box"
-              data-box-num="2"></div>
-
-              <div id="box-3-m"
-              class="col-4 box"
-              data-box-num="3"></div>
-              <div id="box-4-m"
-              class="col-4 box"
-              data-box-num="4"></div>
-              <div id="box-5-m"
-              class="col-4 box"
-              data-box-num="5"></div>
-
-              <div id="box-6-m"
-              class="col-4 box"
-              data-box-num="6"></div>
-              <div id="box-7-m"
-              class="col-4 box"
-              data-box-num="7"></div>
-              <div id="box-8-m"
-              class="col-4 box"
-              data-box-num="8"></div>
-        </section>
+          <section class="col-sm-12 col-lg-3">
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Handle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Larry</td>
+                  <td>the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
         <!-- Game stats -->
         <section class="container hide">
           <div id="display"></div>
         </section>
         <!-- Game Controls -->
-        <section id="game-controls" class="container hide">
-
-          <div class="row">
-            <h3 id="message-games"></h3>
-            <div class="col-sm-12 col-lg-3 d-flex flex-column
-            align-items-center justify-content-center mb-4">
-              <h2>Play Alone</h2>
-              <form id="games-create">
-                <input type="submit"
-                class="form-control mb-2"
-                value="New Game" />
-              </form>
-            </div>
-            <div class="col-sm-12 col-lg-3 d-flex flex-column
-            align-items-center justify-content-center mb-4">
-              <h2>Play A Friend</h2>
-              <form id="games-create-multi">
-                <input type="submit"
-                class="form-control mb-2"
-                value="New Game" />
-              </form>
-            </div>
-            <div class="col-sm-12 col-lg-3 d-flex flex-column
-            align-items-center justify-content-center mb-4">
-              <h2>Get All Games</h2>
-              <form id="games-index">
-                <input type="submit"
-                class="form-control mb-2"
-                value="Get all games" />
-              </form>
-            </div>
-            <div class="col-sm-12 col-lg-3 d-flex flex-column
-            align-items-center justify-content-center mb-4">
-              <!-- <h2>Join A Game</h2> -->
-              <form id="games-join">
-                <!-- <input type="submit"
-                class="btn btn-danger mb-2"
-                value="Join a Game" />
-                <input type="number"
-                class="form-control mb-2"
-                name="games[id]"
-                placeholder="Enter Game Number" /> -->
-                <div class="input-group">
-                  <input type="number"
-                  class="form-control"
-                  name="games[id]"
-                  placeholder="Number" />
-                  <div class="input-group-append">
-                    <input type="submit"
-                    class="btn btn-danger"
-                    value="Join a Game" />
-                  </div>
-                </div>
-              </form>
-            </div>
-
-            <div class="row d-flex align-items-center">
-              <div class="col-sm-12 col-lg-8 input-group-sm mb-4" id="ch-pw-wrapper">
-                <form class="d-flex" id="change-password">
-                  <input type="password"
-                  class="form-control ml-2"
-                  name="passwords[old]"
-                  placeholder="Old Password"/>
-                  <input type="password"
-                  class="form-control ml-2"
-                  name="passwords[new]"
-                  placeholder="New Password"/>
-                  <input class="btn btn-outline-light ml-2"
-                  type="submit"
-                  value="Change Password"/>
-                </form>
-              </div>
-              <div class="col-sm-12 col-lg-4 d-flex justify-content-center mb-4">
-              <form id="sign-out">
-                <input class="btn btn-outline-light"
-                type="submit"
-                value="Sign Out" />
-              </form>
-          </div>
-        </div>
-      </div>
-          <!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModalCenter">
-  Launch demo modal
-</button> -->
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-outline-light">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-          <!-- <div class="container hide">
-
-            <h2>Get A Game</h2>
-            <form id="games-show">
-              <input type="number"
-              name="games[id]"
-              placeholder="id" />
-              <input type="submit"
-              value="Get a Game" />
-            </form>
 
 
-
-            <h2>Update A Game</h2>
-            <form id="games-update">
-              <input type="submit"
-              value="Update A Game" />
-            </form>
-
-          </div> -->
-
-          <!-- Auth controls: sign-out change password -->
-
-          <!-- <div class="container">
-            <h2>Sign Out</h2>
-            <form id="sign-out">
-              <input class="btn btn-outline-light"
-              type="submit"
-              value="Sign Out" />
-            </form>
-
-            <h2>Change Password</h2>
-            <form id="change-password">
-              <input type="password"
-              name="passwords[old]"
-              placeholder="Old Password"/>
-              <input type="password"
-              name="passwords[new]"
-              placeholder="New Password"/>
-              <input class="btn btn-outline-light"
-              type="submit"
-              value="Change Password"/>
-            </form>
-          </div> -->
-
-        </section>
 
       </main>
-      <!-- <footer class="col-12 hide">
-        <div class="row d-flex align-items-center">
-          <div class="col-sm-12 col-lg-8 input-group-sm mb-4" id="ch-pw-wrapper">
-            <form class="d-flex" id="change-password">
-              <input type="password"
-              class="form-control ml-2"
-              name="passwords[old]"
-              placeholder="Old Password"/>
-              <input type="password"
-              class="form-control ml-2"
-              name="passwords[new]"
-              placeholder="New Password"/>
-              <input class="btn btn-outline-light ml-2"
-              type="submit"
-              value="Change Password"/>
-            </form>
-          </div>
-          <div class="col-sm-12 col-lg-4 d-flex justify-content-center mb-4">
-          <form id="sign-out">
-            <input class="btn btn-outline-light"
-            type="submit"
-            value="Sign Out" />
-          </form>
+       <footer class="col-12 d-flex">
+        <div class="container d-flex align-items-center justify-content-around mb-2">
+          <span>&copy; Merritt Blanks</span>
+          <a id="github-icon" href="https://www.github.com/fma126" target="_blank">
+            <i class="fab fa-github fa-2x"></i>
+          </a>
         </div>
-        </div>
-      </footer> -->
+      </footer>
     </body>
 </html>

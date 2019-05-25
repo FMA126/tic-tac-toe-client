@@ -2,82 +2,82 @@
 
 const store = require('../store')
 
+const switchSignInUp = () => {
+  if ($('#sign-up').attr('class') === 'hide') {
+    $('#sign-in').addClass('hide')
+    $('#sign-up').removeClass('hide')
+    $('#sign-up-link').addClass('hide')
+    $('#back-sign-in').removeClass('hide')
+  } else {
+    $('#sign-in').removeClass('hide')
+    $('#sign-up').addClass('hide')
+    $('#sign-up-link').removeClass('hide')
+    $('#back-sign-in').addClass('hide')
+  }
+}
+
 const onSignUpSuccess = responseData => {
   // console.log('success', responseData)
-  // $('#message').removeClass()
-  // $('#message').text('Signed up successfully!')
-  $('#message').text('Signed up successfully! Please sign in')
+  store.signUpPassed = true
   $('form').trigger('reset')
+  $('#emailHelp1').removeClass('attention')
+  $('#emailHelp1').text("We'll never share your email with anyone else.")
+  $('#message').text('Signed up successfully! Please sign in')
 }
 
 const onSignUpFailure = responseData => {
   // console.log('failure', responseData)
-  $('#message').text('Signed up failed! Please sign up again')
-  // $('#message').addClass('failure')
+  store.signUpPassed = false
   $('form').trigger('reset')
+  $('#emailHelp1').text('Email already exists or passwords do not match')
+  $('#emailHelp1').addClass('attention')
+  $('#game-board-section').removeClass('hide')
 }
 
 const onSignInSuccess = responseData => {
   // console.log('success', responseData)
-  // $('#message').removeClass()
-  $('form').trigger('reset')
-  $('#message').text('')
-  $('#message').text('Signed in successfully!')
-  // $('#message').addClass('success')
-  $('.landing-auth').attr('class', 'hide')
-  // $('#landing').addClass('visabil')
-  // $('footer').removeClass('hide')
-  $('#game-controls').removeClass('hide')
   store.user = responseData.user
-  // wait to clear and load the game board
-  //  setTimeout(loadGameBoard, 2000)
-  // $('main').html('')
-  // $('main').html(gameBoard.gameLayout)
+  $('#emailHelp2').removeClass('attention')
+  $('#emailHelp2').text("We'll never share your email with anyone else.")
+  $('form').trigger('reset')
+  $('#landing-auth').addClass('hide')
+  $('#game-controls').removeClass('hide')
 }
 
 const onSignInFailure = responseData => {
   // console.log('failure', responseData)
-  $('#message').text('Signed in failed!')
-  // $('#message').addClass('failure')
   $('form').trigger('reset')
+  $('#emailHelp2').text('Email already exists or passwords do not match')
+  $('#emailHelp2').addClass('attention')
 }
 
 const onSignOutSuccess = responseData => {
   // console.log('success', responseData)
-  // $('#message').removeClass()
   $('#message').text('Signed out successfully!')
-  // $('#message').addClass('success')
-  $('#landing').attr('class', 'landing-auth d-flex justify-content-center')
+  $('#landing-auth').removeClass('hide')
   $('#game-controls').addClass('hide')
-  $('#game-board-single').addClass('visabil')
-  $('#game-board-multi').addClass('visabil')
-
+  $('#game-board-single').addClass('hide')
+  $('#game-board-multi').addClass('hide')
   $('form').trigger('reset')
 }
 
 const onSignOutFailure = responseData => {
-  // console.log('failure', responseData)
   $('#message').text('Signed out failed!')
-  // $('#message').addClass('failure')
   $('form').trigger('reset')
 }
 
 const onChangePasswordSuccess = () => {
-  // console.log('success')
-  // $('#message').removeClass()
   $('#message').text('Changed password successfully!')
-  // $('#message').addClass('success')
   $('form').trigger('reset')
 }
 
 const onChangePasswordFailure = responseData => {
-  // console.log('failure')
   $('#message').text('Change password failed!')
-  // $('#message').addClass('failure')
   $('form').trigger('reset')
 }
 
 module.exports = {
+  switchSignInUp,
   onSignUpSuccess,
   onSignUpFailure,
   onSignInSuccess,
