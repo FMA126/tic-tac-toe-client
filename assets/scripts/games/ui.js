@@ -11,6 +11,8 @@ const onCreateGameSuccess = (responseData) => {
   $(window).scrollTop(0)
   $('#message').text('Single-Player Game')
   $('#message').text('')
+  $('.box').removeClass('highlight-x')
+  $('.box').removeClass('highlight-o')
   // $('footer').addClass('hide')
   $('#message').text('In Play')
   $('#game-board-section').removeClass('hide')
@@ -46,6 +48,8 @@ const onCreateMultiGameSuccess = (responseData) => {
   $(window).scrollTop(0)
   $('#game-board-single').addClass('hide')
   $('#game-board-multi').removeClass('hide')
+  $('.box').removeClass('highlight-x')
+  $('.box').removeClass('highlight-o')
 
   store.game.FreshGame = new GameConstructor(
     responseData.game.id,
@@ -224,6 +228,11 @@ const onUpdateGameSuccess = responseData => {
     $('#message').text(`Tie Game!`)
   }
   $(`#${store.game.FreshGame.getLastSquareId()}`).text(store.game.FreshGame.getLastCellValue())
+  if (store.game.FreshGame.getLastCellValue() === 'x') {
+    $(`#${store.game.FreshGame.getLastSquareId()}`).addClass('highlight-x')
+  } else {
+    $(`#${store.game.FreshGame.getLastSquareId()}`).addClass('highlight-o')
+  }
   // $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()} cells: ${store.game.FreshGame.getCells()}
   //   over: ${store.game.FreshGame.getOver()} player_x: ${store.game.FreshGame.getPlayerX()}
   //   </p><hr>`)
@@ -263,6 +272,11 @@ const onUpdateMultiGameSuccess = responseData => {
     $('#message').text(`Tie Game!`)
   }
   $(`#${store.game.FreshGame.getLastSquareId()}`).text(store.game.FreshGame.getLastCellValue())
+  if (store.game.FreshGame.getLastCellValue() === 'x') {
+    $(`#${store.game.FreshGame.getLastSquareId()}`).addClass('highlight-x')
+  } else {
+    $(`#${store.game.FreshGame.getLastSquareId()}`).addClass('highlight-o')
+  }
   // $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()} cells: ${store.game.FreshGame.getCells()}
   //   over: ${store.game.FreshGame.getOver()} player_x: ${store.game.FreshGame.getPlayerX()}
   //   </p><hr>`)

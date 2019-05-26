@@ -16,26 +16,16 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Game Center</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
             </div>
             <div class="modal-body">
-              <form id="change-password">
-                <div class="form-group">
-                  <label for="currentPassword">Current Password</label>
-                  <input type="password" class="form-control"
-                  name="passwords[old]" id="currentPassword" placeholder="Old Password">
-                </div>
-                <div class="form-group">
-                  <label for="newPassword">New Password</label>
-                  <input type="password" class="form-control"
-                  name="passwords[new]"
-                  id="newPassword" placeholder="New Password">
-                </div>
-                <button type="submit" class="btn btn-secondary">Change Password</button>
-              </form>
+              <div class="list-group">
+                <a id="settings-li"href="#" class="list-group-item list-group-item-action" data-dismiss="modal">Settings</a>
+                <a id="about-li"href="#" class="list-group-item list-group-item-action" data-dismiss="modal">About Tic-Tac-Toe</a>
+              </div>
             </div>
             <div class="modal-footer">
               <button id="sign-out" type="button" class="btn btn-primary"
@@ -125,13 +115,12 @@
             <a id="sign-up-link" class="text-decoration-none" href="#">Not a member?</a>
             <a id="back-sign-in" class="hide text-decoration-none" href="#">Sign in</a>
           </div>
-        <!-- </div> -->
-
         </section>
-        <!-- Game Board -->
-        <div class="row">
-          <section id="game-controls" class="col-sm-12 col-lg-3 d-flex
-          justify-content-center align-items-center hide">
+        <!-- Game Controls Section -->
+        <div id ="game-master" class="row hide">
+
+          <section id="game-controls" class="col-sm-12 col-lg-3 order-1 order-lg-0 d-flex
+          justify-content-center align-items-center">
 
             <div class="row d-flex justify-content-center">
               <h3 id="message-games"></h3>
@@ -164,9 +153,7 @@
               </div>
               <div class="col-12 d-flex flex-column
               align-items-center justify-content-center mb-4">
-                <!-- <h2>Join A Game</h2> -->
                 <form id="games-join">
-
                   <div class="input-group">
                     <input type="number"
                     class="form-control"
@@ -180,10 +167,11 @@
                   </div>
                 </form>
               </div>
-        </div>
-
+            </div>
           </section>
-          <section class="col-sm-12 col-lg-6 d-flex justify-content-center align-items-center"
+        <!--multiplayer game  -->
+          <section class="col-sm-12 col-lg-6 order-0 order-lg-1 d-flex justify-content-center
+          align-items-center"
           id="game-board-section" >
             <div class="game-board row" id="game-board-single">
                 <div id="box-0"
@@ -217,7 +205,7 @@
                 data-box-num="8"></div>
             </div>
 
-            <div class="game-board row hide" id="game-board-multi">
+            <div class="game-board order-0 order-lg-1 row hide" id="game-board-multi">
                 <div id="box-0-m"
                 class="col-4 box"
                 data-box-num="0"></div>
@@ -250,7 +238,7 @@
               </div>
           </section>
 
-          <section class="col-sm-12 col-lg-3">
+          <section class="col-sm-12 col-lg-3 order-2">
             <table class="table table-dark">
               <thead>
                 <tr>
@@ -283,13 +271,33 @@
             </table>
           </section>
         </div>
+
+          <section id="all-settings" class="col-sm-12 col-lg-3 container hide">
+            <form id="change-password">
+              <div class="form-group">
+                <label for="currentPassword">Current Password</label>
+                <input type="password" class="form-control"
+                name="passwords[old]" id="currentPassword" placeholder="Current Password">
+              </div>
+              <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input type="password" class="form-control"
+                name="passwords[new]"
+                id="newPassword" placeholder="New Password">
+                <small id="passwordHelp"
+                class="form-text text-muted hide"></small>
+              </div>
+              <button type="submit" class="btn btn-secondary">Change Password</button>
+            </form>
+
+            <button id="settings-return-game" type="button" class="btn btn-warning">
+              Back To Game</button>
+          </section>
+
         <!-- Game stats -->
         <section class="container hide">
           <div id="display"></div>
         </section>
-        <!-- Game Controls -->
-
-
 
       </main>
        <footer class="col-12 d-flex">

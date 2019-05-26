@@ -38,6 +38,18 @@ const onSwitchSignInUp = () => {
   ui.switchSignInUp()
 }
 
+const onShowSettings = () => {
+  ui.onShowSettingsSuccess()
+}
+
+const onGameReturn = () => {
+  ui.onGameReturnSuccess()
+}
+
+const onShowAbout = () => {
+  ui.onShowAboutSuccess()
+}
+
 const onSignIn = event => {
   event.preventDefault()
 
@@ -74,6 +86,9 @@ const onChangePassword = event => {
 
 module.exports = {
   onSwitchSignInUp,
+  onShowSettings,
+  onGameReturn,
+  onShowAbout,
   onAutoSignIn,
   onSignUp,
   onSignIn,

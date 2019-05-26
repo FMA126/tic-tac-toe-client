@@ -16,6 +16,21 @@ const switchSignInUp = () => {
   }
 }
 
+const onShowSettingsSuccess = () => {
+  $('#game-master').addClass('hide')
+  $('#all-settings').removeClass('hide')
+}
+
+const onGameReturnSuccess = () => {
+  $('#passwordHelp').addClass('hide')
+  $('#game-master').removeClass('hide')
+  $('#all-settings').addClass('hide')
+}
+
+const onShowAboutSuccess = () => {
+  $('#about')
+}
+
 const onSignUpSuccess = responseData => {
   // console.log('success', responseData)
   store.signUpPassed = true
@@ -41,7 +56,7 @@ const onSignInSuccess = responseData => {
   $('#emailHelp2').text("We'll never share your email with anyone else.")
   $('form').trigger('reset')
   $('#landing-auth').addClass('hide')
-  $('#game-controls').removeClass('hide')
+  $('#game-master').removeClass('hide')
 }
 
 const onSignInFailure = responseData => {
@@ -67,17 +82,24 @@ const onSignOutFailure = responseData => {
 }
 
 const onChangePasswordSuccess = () => {
-  $('#message').text('Changed password successfully!')
+  $('#passwordHelp').removeClass('hide')
+  $('#passwordHelp').text('Password changed successfully.')
+  $('#passwordHelp').removeClass('attention')
   $('form').trigger('reset')
 }
 
 const onChangePasswordFailure = responseData => {
-  $('#message').text('Change password failed!')
+  $('#passwordHelp').removeClass('hide')
+  $('#passwordHelp').text('Please re-enter current password.')
+  $('#passwordHelp').addClass('attention')
   $('form').trigger('reset')
 }
 
 module.exports = {
   switchSignInUp,
+  onShowSettingsSuccess,
+  onGameReturnSuccess,
+  onShowAboutSuccess,
   onSignUpSuccess,
   onSignUpFailure,
   onSignInSuccess,
