@@ -14,6 +14,7 @@ $alert: #ff2600;
 body {
   background: $deeppurp;
   font-family: Poppins, sans-serif;
+  -webkit-transform: translate3d(0,0,0);
   width: 1300px;
 }
 
