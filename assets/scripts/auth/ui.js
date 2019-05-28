@@ -55,6 +55,9 @@ const onSignInSuccess = responseData => {
   $('#emailHelp2').removeClass('attention')
   $('#emailHelp2').text("We'll never share your email with anyone else.")
   $('form').trigger('reset')
+  $('#message').text('')
+  $('.dots').attr('data-toggle', 'modal')
+  $('.dots').addClass('pointer')
   $('#landing-auth').addClass('hide')
   $('#game-master').removeClass('hide')
 }
@@ -70,9 +73,9 @@ const onSignOutSuccess = responseData => {
   // console.log('success', responseData)
   $('#message').text('Signed out successfully!')
   $('#landing-auth').removeClass('hide')
-  $('#game-controls').addClass('hide')
-  $('#game-board-single').addClass('hide')
-  $('#game-board-multi').addClass('hide')
+  $('.dots').attr('data-toggle', '')
+  $('.dots').removeClass('pointer')
+  $('#game-master').addClass('hide')
   $('form').trigger('reset')
 }
 

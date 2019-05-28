@@ -23,6 +23,7 @@
             </div>
             <div class="modal-body">
               <div class="list-group">
+                <a id="game-stats-li"href="#" class="list-group-item list-group-item-action" data-dismiss="modal">Game Stats</a>
                 <a id="settings-li"href="#" class="list-group-item list-group-item-action" data-dismiss="modal">Settings</a>
                 <a id="about-li"href="#" class="list-group-item list-group-item-action" data-dismiss="modal">About Tic-Tac-Toe</a>
               </div>
@@ -40,7 +41,7 @@
       justify-content-between">
 
           <h1>Tic Tac Toe</h1>
-          <div class="dots" type="button" data-toggle="modal" data-target="#exampleModal">
+          <div class="dots" data-target="#exampleModal">
             <div></div>
             <div></div>
             <div></div>
@@ -126,7 +127,7 @@
               <h3 id="message-games"></h3>
               <div class="col-12 d-flex flex-column
               align-items-center justify-content-center mb-4">
-                <h2>Play Alone</h2>
+                <h2>Single-player</h2>
                 <form id="games-create">
                   <input type="submit"
                   class="form-control mb-2"
@@ -135,7 +136,7 @@
               </div>
               <div class="col-12 d-flex flex-column
               align-items-center justify-content-center mb-4">
-                <h2>Play A Friend</h2>
+                <h2>Multi-player</h2>
                 <form id="games-create-multi">
                   <input type="submit"
                   class="form-control mb-2"
@@ -238,7 +239,7 @@
               </div>
           </section>
 
-          <section class="col-sm-12 col-lg-3 order-2">
+          <section class="col-sm-12 col-lg-3 container order-2">
             <table class="table table-dark">
               <thead>
                 <tr>

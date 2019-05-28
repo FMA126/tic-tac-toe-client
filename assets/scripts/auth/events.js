@@ -21,7 +21,7 @@ const onSignUp = event => {
   event.preventDefault()
   const form = event.target
   const formData = getFormFields(form)
-  console.log(formData)
+  // console.log(formData)
 
   // console.log('sign up pressed', formData)
   api.signUp(formData)

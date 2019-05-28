@@ -92,6 +92,7 @@ section {
 }
 
 .game-board {
+  font-family: 'Luckiest Guy', sans-serif;
   height: 60vh;
   width: 60vh;
   margin: auto;
@@ -153,6 +154,10 @@ h1:hover::before, h1:hover::after {
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   align-items: center;
+}
+
+.pointer:hover {
+  cursor: pointer;
 }
 
 .dots > div {
