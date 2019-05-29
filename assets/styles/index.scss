@@ -98,6 +98,10 @@ section {
   margin: auto;
 }
 
+.game-board:hover {
+  cursor: pointer;
+}
+
 #github-icon {
 
   i {
@@ -267,9 +271,15 @@ button:hover::after {
 }
 
 @media only screen and (max-width: 500px) {
+
+  .game-master > section {
+    height: auto;
+  }
+
   .game-board {
     height: 300px;
     width: 300px;
     margin: auto;
+    margin-top: 2rem;
   }
 }

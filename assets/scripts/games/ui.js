@@ -9,6 +9,7 @@ const onCreateGameSuccess = (responseData) => {
   $('.box').html('')
   // $('#game-board-multi').addClass('hide')
   $(window).scrollTop(0)
+  $('#game-board-single').tooltip('disable')
   $('#message').text('Single-Player Game')
   $('#message').text('')
   $('.box').removeClass('highlight-x')

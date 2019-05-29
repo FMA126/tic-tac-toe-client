@@ -17,7 +17,9 @@ const switchSignInUp = () => {
 }
 
 const onShowSettingsSuccess = () => {
+  $('#message').text('')
   $('#game-master').addClass('hide')
+  $('#about').addClass('hide')
   $('#all-settings').removeClass('hide')
 }
 
@@ -25,10 +27,14 @@ const onGameReturnSuccess = () => {
   $('#passwordHelp').addClass('hide')
   $('#game-master').removeClass('hide')
   $('#all-settings').addClass('hide')
+  $('#about').addClass('hide')
 }
 
 const onShowAboutSuccess = () => {
-  $('#about')
+  $('#message').text('')
+  $('#about').removeClass('hide')
+  $('#game-master').addClass('hide')
+  $('#all-settings').addClass('hide')
 }
 
 const onSignUpSuccess = responseData => {
@@ -43,6 +49,7 @@ const onSignUpSuccess = responseData => {
 const onSignUpFailure = responseData => {
   // console.log('failure', responseData)
   store.signUpPassed = false
+
   $('form').trigger('reset')
   $('#emailHelp1').text('Email already exists or passwords do not match')
   $('#emailHelp1').addClass('attention')
@@ -52,10 +59,14 @@ const onSignUpFailure = responseData => {
 const onSignInSuccess = responseData => {
   // console.log('success', responseData)
   store.user = responseData.user
+  $('#game-board-single').tooltip('enable')
+  $('#single-new').tooltip('enable')
+  $('#multi-new').tooltip('enable')
+  $('#join-new').tooltip('enable')
+  $('#message').text('Welcome! Select New Game To Start')
   $('#emailHelp2').removeClass('attention')
   $('#emailHelp2').text("We'll never share your email with anyone else.")
   $('form').trigger('reset')
-  $('#message').text('')
   $('.dots').attr('data-toggle', 'modal')
   $('.dots').addClass('pointer')
   $('#landing-auth').addClass('hide')
@@ -71,6 +82,7 @@ const onSignInFailure = responseData => {
 
 const onSignOutSuccess = responseData => {
   // console.log('success', responseData)
+  $('#game-board-single').tooltip('enable')
   $('#message').text('Signed out successfully!')
   $('#landing-auth').removeClass('hide')
   $('.dots').attr('data-toggle', '')
