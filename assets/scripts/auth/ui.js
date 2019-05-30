@@ -5,12 +5,14 @@ const store = require('../store')
 const switchSignInUp = () => {
   if ($('#sign-up').attr('class') === 'hide') {
     $(window).scrollTop(0)
+    $('form').trigger('reset')
     $('#sign-in').addClass('hide')
     $('#sign-up').removeClass('hide')
     $('#sign-up-link').addClass('hide')
     $('#back-sign-in').removeClass('hide')
   } else {
     $(window).scrollTop(0)
+    $('form').trigger('reset')
     $('#sign-in').removeClass('hide')
     $('#sign-up').addClass('hide')
     $('#sign-up-link').removeClass('hide')
@@ -21,6 +23,7 @@ const switchSignInUp = () => {
 const onShowSettingsSuccess = () => {
   $(window).scrollTop(0)
   $('#message').text('')
+  $('#stats-table').addClass('hide')
   $('#game-master').addClass('hide')
   $('#about').addClass('hide')
   $('#all-settings').removeClass('hide')
@@ -37,6 +40,7 @@ const onGameReturnSuccess = () => {
 const onShowAboutSuccess = () => {
   $(window).scrollTop(0)
   $('#message').text('')
+  $('#stats-table').addClass('hide')
   $('#about').removeClass('hide')
   $('#game-master').addClass('hide')
   $('#all-settings').addClass('hide')
