@@ -8,6 +8,7 @@ const ui = require('./ui')
 
 const onCreate = event => {
   event.preventDefault()
+  store.active = true
   // console.log('create game pressed')
   api.onCreateGame()
     .then(ui.onCreateGameSuccess)
@@ -75,32 +76,33 @@ const onJoin = event => {
 const onUpdateSingle = event => {
   const inner = $(`#${event.target.id}`).text()
   const dataIndex = $(`#${event.target.id}`).data('box-num')
-  const requestData = {
-    'game': {
-      'cell': {
-        'index': dataIndex,
-        'value': 'something wrong'
-      },
-      'over': store.game.FreshGame.getOver()
-    }
-  }
   // console.log(store.game.FreshGame.isPlayerTurn() === 'player x')
-
-  if (!inner && !store.game.FreshGame.getOver()) {
-    if (store.game.FreshGame.isPlayerTurn() === 'player x') {
-      store.game.FreshGame.setLastCellValue('x')
-    } else {
-      store.game.FreshGame.setLastCellValue('o')
+  if (store.active) {
+    const requestData = {
+      'game': {
+        'cell': {
+          'index': dataIndex,
+          'value': 'something wrong'
+        },
+        'over': store.game.FreshGame.getOver()
+      }
     }
-    event.preventDefault()
-    store.game.FreshGame.setLastSquareId(event.target.id)
-    store.game.FreshGame.setLastCellIndex(dataIndex)
-    requestData.game.cell.value = store.game.FreshGame.getLastCellValue()
+    if (!inner && !store.game.FreshGame.getOver()) {
+      if (store.game.FreshGame.isPlayerTurn() === 'player x') {
+        store.game.FreshGame.setLastCellValue('x')
+      } else {
+        store.game.FreshGame.setLastCellValue('o')
+      }
+      event.preventDefault()
+      store.game.FreshGame.setLastSquareId(event.target.id)
+      store.game.FreshGame.setLastCellIndex(dataIndex)
+      requestData.game.cell.value = store.game.FreshGame.getLastCellValue()
 
-    // console.log('update game pressed')
-    api.onUpdateGame(requestData)
-      .then(ui.onUpdateGameSuccess)
-      .catch(ui.onUpdateGameFailure)
+      // console.log('update game pressed')
+      api.onUpdateGame(requestData)
+        .then(ui.onUpdateGameSuccess)
+        .catch(ui.onUpdateGameFailure)
+    }
   }
 }
 

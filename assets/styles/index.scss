@@ -1,5 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 $highlight: hsl(236, 32%, 36%);
 $square: hsl(236, 32%, 26%);
@@ -13,7 +14,7 @@ $alert: #ff2600;
 
 body {
   background: $deeppurp;
-  font-family: Poppins, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-transform: translate3d(0,0,0);
   width: 1300px;
 }
@@ -283,4 +284,8 @@ button:hover::after {
     margin: auto;
     margin-top: 2rem;
   }
+
+  // .single-game-controls {
+  //   margin-top: 20px;
+  // }
 }

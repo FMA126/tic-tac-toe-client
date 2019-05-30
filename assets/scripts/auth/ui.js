@@ -4,11 +4,13 @@ const store = require('../store')
 
 const switchSignInUp = () => {
   if ($('#sign-up').attr('class') === 'hide') {
+    $(window).scrollTop(0)
     $('#sign-in').addClass('hide')
     $('#sign-up').removeClass('hide')
     $('#sign-up-link').addClass('hide')
     $('#back-sign-in').removeClass('hide')
   } else {
+    $(window).scrollTop(0)
     $('#sign-in').removeClass('hide')
     $('#sign-up').addClass('hide')
     $('#sign-up-link').removeClass('hide')
@@ -17,6 +19,7 @@ const switchSignInUp = () => {
 }
 
 const onShowSettingsSuccess = () => {
+  $(window).scrollTop(0)
   $('#message').text('')
   $('#game-master').addClass('hide')
   $('#about').addClass('hide')
@@ -24,6 +27,7 @@ const onShowSettingsSuccess = () => {
 }
 
 const onGameReturnSuccess = () => {
+  $(window).scrollTop(0)
   $('#passwordHelp').addClass('hide')
   $('#game-master').removeClass('hide')
   $('#all-settings').addClass('hide')
@@ -31,6 +35,7 @@ const onGameReturnSuccess = () => {
 }
 
 const onShowAboutSuccess = () => {
+  $(window).scrollTop(0)
   $('#message').text('')
   $('#about').removeClass('hide')
   $('#game-master').addClass('hide')
@@ -40,6 +45,7 @@ const onShowAboutSuccess = () => {
 const onSignUpSuccess = responseData => {
   // console.log('success', responseData)
   store.signUpPassed = true
+  $(window).scrollTop(0)
   $('form').trigger('reset')
   $('#emailHelp1').removeClass('attention')
   $('#emailHelp1').text("We'll never share your email with anyone else.")
@@ -49,7 +55,7 @@ const onSignUpSuccess = responseData => {
 const onSignUpFailure = responseData => {
   // console.log('failure', responseData)
   store.signUpPassed = false
-
+  $(window).scrollTop(0)
   $('form').trigger('reset')
   $('#emailHelp1').text('Email already exists or passwords do not match')
   $('#emailHelp1').addClass('attention')
@@ -59,6 +65,7 @@ const onSignUpFailure = responseData => {
 const onSignInSuccess = responseData => {
   // console.log('success', responseData)
   store.user = responseData.user
+  $(window).scrollTop(0)
   $('#game-board-single').tooltip('enable')
   $('#single-new').tooltip('enable')
   $('#multi-new').tooltip('enable')
@@ -75,6 +82,7 @@ const onSignInSuccess = responseData => {
 
 const onSignInFailure = responseData => {
   // console.log('failure', responseData)
+  $(window).scrollTop(0)
   $('form').trigger('reset')
   $('#emailHelp2').text('Email already exists or passwords do not match')
   $('#emailHelp2').addClass('attention')
@@ -82,6 +90,7 @@ const onSignInFailure = responseData => {
 
 const onSignOutSuccess = responseData => {
   // console.log('success', responseData)
+  $(window).scrollTop(0)
   $('#game-board-single').tooltip('enable')
   $('#message').text('Signed out successfully!')
   $('#landing-auth').removeClass('hide')
@@ -92,11 +101,13 @@ const onSignOutSuccess = responseData => {
 }
 
 const onSignOutFailure = responseData => {
+  $(window).scrollTop(0)
   $('#message').text('Signed out failed!')
   $('form').trigger('reset')
 }
 
 const onChangePasswordSuccess = () => {
+  $(window).scrollTop(0)
   $('#passwordHelp').removeClass('hide')
   $('#passwordHelp').text('Password changed successfully.')
   $('#passwordHelp').removeClass('attention')
@@ -104,6 +115,7 @@ const onChangePasswordSuccess = () => {
 }
 
 const onChangePasswordFailure = responseData => {
+  $(window).scrollTop(0)
   $('#passwordHelp').removeClass('hide')
   $('#passwordHelp').text('Please re-enter current password.')
   $('#passwordHelp').addClass('attention')
