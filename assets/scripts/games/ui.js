@@ -187,6 +187,8 @@ const onJoinGameSuccess = responseData => {
   $(window).scrollTop(0)
   $('#message').text('You are O')
   $('form').trigger('reset')
+  $('.box').removeClass('highlight-x')
+  $('.box').removeClass('highlight-o')
 
   store.game.FreshGame = new GameConstructor(
     responseData.game.id,

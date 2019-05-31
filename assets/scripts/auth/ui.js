@@ -31,6 +31,7 @@ const onShowSettingsSuccess = () => {
 
 const onGameReturnSuccess = () => {
   $(window).scrollTop(0)
+  $('#stats-table').addClass('hide')
   $('#passwordHelp').addClass('hide')
   $('#game-master').removeClass('hide')
   $('#all-settings').addClass('hide')

@@ -17,6 +17,7 @@ $(() => {
   $('#settings-li').on('click', authEvents.onShowSettings)
   $('#about-li').on('click', authEvents.onShowAbout)
   $('#settings-return-game').on('click', authEvents.onGameReturn)
+  $('#stats-return-game').on('click', authEvents.onGameReturn)
   $('#about-return-game').on('click', authEvents.onGameReturn)
   $('#sign-out').on('click', authEvents.onSignOut)
   $('#change-password').on('submit', authEvents.onChangePassword)
