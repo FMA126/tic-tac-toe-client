@@ -217,7 +217,7 @@ Gameboard.prototype.watch = function () {
     // console.log(i)
     // console.log(store.game.FreshGame.getCells())
     i++
-    if (i > 6) {
+    if (i > 75) {
       return
     } else if (store.game.FreshGame.isPlayerTurn() === 'player o' &&
      store.game.FreshGame.getPlayerOId() === store.user.id) {
@@ -257,7 +257,7 @@ Gameboard.prototype.watch = function () {
       })
       .catch(ui.onShowMultiGameFailure)
 
-    setTimeout(yourFunction, 5000)
+    setTimeout(yourFunction, 800)
   }
   yourFunction()
 }

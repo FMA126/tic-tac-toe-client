@@ -79,22 +79,32 @@ const onCreateMultiGameFailure = (responseData) => {
 
 const onIndexGameSuccess = responseData => {
   // console.log('success', responseData)
-  $('#display').html('')
+  $('#message').text('')
+  $('#game-master').addClass('hide')
+  $('#all-settings').addClass('hide')
+  $('#about').addClass('hide')
+  $('#stats-table').removeClass('hide')
 
   const games = responseData.games
+  let gameCount = 0
   games.forEach(games => {
-    $('#display').append(`<p>id: ${games.id} over: ${games.over}</p><hr>`)
+    gameCount++
+    $('#table-body').append(`
+      <tr>
+        <th scope="row">${games.id}</th>
+        <td>${games.cells}</td>
+        <td>${games.over === true ? 'unfinished' : 'game over'}</td>
+        <td>${games.player_x.email}</td>
+      </tr>
+      `)
   })
-  $('#display').append(`<div class="col-sm-12 col-lg-3 d-flex flex-column align-items-center justify-content-center mb-4">
-                <h2>Get All Games</h2>
-                <form id="clear-games-index">
-                  <input type="submit"
-                  class="form-control mb-2"
-                  value="Clear all games" />
-                </form>
-              </div>`)
-  // $('#message').removeClass()
-  // $('#message').addClass('success')
+  $('#table-body').append(`
+      <tr>
+        <th scope="row"></th>
+        <td>Total Games</td>
+        <td>${gameCount}</td>
+      </tr>
+  `)
 }
 
 const onIndexGameFailure = responseData => {
@@ -177,6 +187,8 @@ const onJoinGameSuccess = responseData => {
   $(window).scrollTop(0)
   $('#message').text('You are O')
   $('form').trigger('reset')
+  $('.box').removeClass('highlight-x')
+  $('.box').removeClass('highlight-o')
 
   store.game.FreshGame = new GameConstructor(
     responseData.game.id,
