@@ -131,9 +131,12 @@
               <div id="single-new" class="col-12 d-flex flex-column
               align-items-center justify-content-center mb-4"
               data-toggle="tooltip"
-              data-placement="right"
-              title="Click to Play">
-                <h2>Single-player</h2>
+              data-placement="top"
+              title="Single Player Mode">
+                <h2>Single-Player</h2>
+                <small class="form-text text-muted mb-2">
+                  Play local
+                </small>
                 <form id="games-create">
                   <input type="submit"
                   class="form-control btn btn-primary mb-2"
@@ -219,25 +222,28 @@
 
             <div class="row d-flex justify-content-center">
               <div id="multi-new" class="col-12 d-flex flex-column
-              align-items-center justify-content-center mb-4"
+              align-items-center justify-content-center"
               data-toggle="tooltip"
               data-placement="top"
-              title="Click to Play">
-                <h2>Multi-player</h2>
-                <form id="games-create-multi">
-                  <input type="submit"
-                  class="form-control btn btn-primary mb-2"
-                  value="New Game" />
-                </form>
+              title="Multi-Player Mode">
+                <h2>Multi-Player Online</h2>
               </div>
               <div id="join-new" class="col-12 d-flex flex-column
               align-items-center justify-content-center mb-4"
               data-toggle="tooltip"
-              data-placement="bottom"
-              title="Click to Join Game">
+              data-placement="top"
+              title="Host or Join">
+                <form id="games-create-multi">
+                  <small class="form-text text-muted mb-2">
+                    Host game, you are player x.
+                  </small>
+                  <input type="submit"
+                  class="form-control btn btn-primary mb-2"
+                  value="Host Game" />
+                </form>
                 <form id="games-join">
-                  <small class="form-text text-muted">
-                    Ask your friend for the game number
+                  <small class="form-text text-muted mb-2">
+                    Ask friend for game number, you are player o.
                   </small>
                   <div class="input-group">
                     <input type="number"

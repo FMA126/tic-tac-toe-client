@@ -62,8 +62,8 @@ const onCreateMultiGameSuccess = (responseData) => {
   // console.log(store.game.FreshGame)
   // store.game.FreshGame.setPreviousCells(responseData.game.cells)
   // console.log('Previous from Create', store.game.FreshGame.getPreviousCells())
-  $('#message').text(`Game Number: ${store.game.FreshGame.getId()}. Have your
-  friend enter this number to join the game.`)
+  $('#message').text(`Game Number: ${store.game.FreshGame.getId()}. Tell
+  friend to enter number and join game.`)
   // $('#display').append(`<p>Game id: ${store.game.FreshGame.getId()}
   // cells: ${store.game.FreshGame.getCells()}
   //   over: ${store.game.FreshGame.getOver()}
@@ -84,6 +84,7 @@ const onIndexGameSuccess = responseData => {
   $('#all-settings').addClass('hide')
   $('#about').addClass('hide')
   $('#stats-table').removeClass('hide')
+  $('#table-body').html('')
 
   const games = responseData.games
   let gameCount = 0
@@ -93,7 +94,7 @@ const onIndexGameSuccess = responseData => {
       <tr>
         <th scope="row">${games.id}</th>
         <td>${games.cells}</td>
-        <td>${games.over === true ? 'unfinished' : 'game over'}</td>
+        <td>${games.over === true ? 'game over' : 'unfinished'}</td>
         <td>${games.player_x.email}</td>
       </tr>
       `)

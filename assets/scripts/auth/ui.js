@@ -75,7 +75,7 @@ const onSignInSuccess = responseData => {
   $('#single-new').tooltip('enable')
   $('#multi-new').tooltip('enable')
   $('#join-new').tooltip('enable')
-  $('#message').text('Welcome! Select New Game To Start')
+  $('#message').text('Welcome! Choose A Game To Start')
   $('#emailHelp2').removeClass('attention')
   $('#emailHelp2').text("We'll never share your email with anyone else.")
   $('form').trigger('reset')
