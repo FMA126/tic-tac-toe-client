@@ -96,6 +96,11 @@ const onSignInFailure = responseData => {
 const onSignOutSuccess = responseData => {
   // console.log('success', responseData)
   $(window).scrollTop(0)
+  store.active = false
+  $('#game-board-single').tooltip('enable')
+  $('.box').html('')
+  $('.box').removeClass('highlight-x')
+  $('.box').removeClass('highlight-o')
   $('#game-board-single').tooltip('enable')
   $('#message').text('Signed out successfully!')
   $('#landing-auth').removeClass('hide')

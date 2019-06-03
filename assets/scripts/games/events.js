@@ -17,6 +17,7 @@ const onCreate = event => {
 
 const onCreateMulti = event => {
   event.preventDefault()
+  store.active = true
   $('.box').html('')
   // $('#game-board-single').addClass('hide-')
   $('#game-board-single').addClass('hide')
@@ -109,53 +110,55 @@ const onUpdateSingle = event => {
 const onUpdateMulti = event => {
   const inner = $(`#${event.target.id}`).text()
   const dataIndex = $(`#${event.target.id}`).data('box-num')
-  const requestData = {
-    'game': {
-      'cell': {
-        'index': dataIndex,
-        'value': 'something wrong'
-      },
-      'over': store.game.FreshGame.getOver()
-    }
-  }
-  // console.log(store.game.FreshGame.isPlayerTurn() === 'player x')
-  if (store.game.FreshGame.isPlayerTurn() === 'player x' &&
-   store.game.FreshGame.getPlayerXId() === store.user.id) {
-    if (!inner && !store.game.FreshGame.getOver()) {
-      if (store.game.FreshGame.isPlayerTurn() === 'player x') {
-        store.game.FreshGame.setLastCellValue('x')
-      } else {
-        store.game.FreshGame.setLastCellValue('o')
+  if (store.active) {
+    const requestData = {
+      'game': {
+        'cell': {
+          'index': dataIndex,
+          'value': 'something wrong'
+        },
+        'over': store.game.FreshGame.getOver()
       }
-      event.preventDefault()
-      store.game.FreshGame.setLastSquareId(event.target.id)
-      store.game.FreshGame.setLastCellIndex(dataIndex)
-      requestData.game.cell.value = store.game.FreshGame.getLastCellValue()
-
-      // console.log('update game pressed')
-      store.game.FreshGame.setPreviousCells(store.game.FreshGame.getCells())
-      api.onUpdateGame(requestData)
-        .then(ui.onUpdateMultiGameSuccess)
-        .catch(ui.onUpdateMultiGameFailure)
     }
-  } else if (store.game.FreshGame.isPlayerTurn() === 'player o' &&
-   store.game.FreshGame.getPlayerOId() === store.user.id) {
-    if (!inner && !store.game.FreshGame.getOver()) {
-      if (store.game.FreshGame.isPlayerTurn() === 'player x') {
-        store.game.FreshGame.setLastCellValue('x')
-      } else {
-        store.game.FreshGame.setLastCellValue('o')
-      }
-      event.preventDefault()
-      store.game.FreshGame.setLastSquareId(event.target.id)
-      store.game.FreshGame.setLastCellIndex(dataIndex)
-      requestData.game.cell.value = store.game.FreshGame.getLastCellValue()
+    // console.log(store.game.FreshGame.isPlayerTurn() === 'player x')
+    if (store.game.FreshGame.isPlayerTurn() === 'player x' &&
+     store.game.FreshGame.getPlayerXId() === store.user.id) {
+      if (!inner && !store.game.FreshGame.getOver()) {
+        if (store.game.FreshGame.isPlayerTurn() === 'player x') {
+          store.game.FreshGame.setLastCellValue('x')
+        } else {
+          store.game.FreshGame.setLastCellValue('o')
+        }
+        event.preventDefault()
+        store.game.FreshGame.setLastSquareId(event.target.id)
+        store.game.FreshGame.setLastCellIndex(dataIndex)
+        requestData.game.cell.value = store.game.FreshGame.getLastCellValue()
 
-      // console.log('update game pressed')
-      store.game.FreshGame.setPreviousCells(store.game.FreshGame.getCells())
-      api.onUpdateGame(requestData)
-        .then(ui.onUpdateMultiGameSuccess)
-        .catch(ui.onUpdateMultiGameFailure)
+        // console.log('update game pressed')
+        store.game.FreshGame.setPreviousCells(store.game.FreshGame.getCells())
+        api.onUpdateGame(requestData)
+          .then(ui.onUpdateMultiGameSuccess)
+          .catch(ui.onUpdateMultiGameFailure)
+      }
+    } else if (store.game.FreshGame.isPlayerTurn() === 'player o' &&
+     store.game.FreshGame.getPlayerOId() === store.user.id) {
+      if (!inner && !store.game.FreshGame.getOver()) {
+        if (store.game.FreshGame.isPlayerTurn() === 'player x') {
+          store.game.FreshGame.setLastCellValue('x')
+        } else {
+          store.game.FreshGame.setLastCellValue('o')
+        }
+        event.preventDefault()
+        store.game.FreshGame.setLastSquareId(event.target.id)
+        store.game.FreshGame.setLastCellIndex(dataIndex)
+        requestData.game.cell.value = store.game.FreshGame.getLastCellValue()
+
+        // console.log('update game pressed')
+        store.game.FreshGame.setPreviousCells(store.game.FreshGame.getCells())
+        api.onUpdateGame(requestData)
+          .then(ui.onUpdateMultiGameSuccess)
+          .catch(ui.onUpdateMultiGameFailure)
+      }
     }
   }
 }

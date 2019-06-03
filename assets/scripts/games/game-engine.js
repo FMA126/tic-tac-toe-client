@@ -213,6 +213,10 @@ Gameboard.prototype.watch = function () {
   // do whatever you like here
   let i = 0
 
+  if (!store.active) {
+    return
+  }
+
   function yourFunction () {
     // console.log(i)
     // console.log(store.game.FreshGame.getCells())

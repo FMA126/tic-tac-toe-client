@@ -185,6 +185,7 @@ const onShowGameFailure = responseData => {
 
 const onJoinGameSuccess = responseData => {
   $('#display').html('')
+  store.active = true
   $(window).scrollTop(0)
   $('#message').text('You are O')
   $('form').trigger('reset')
@@ -217,6 +218,7 @@ const onJoinGameSuccess = responseData => {
 }
 
 const onJoinGameFailure = responseData => {
+  store.active = false
   $('#message').html('')
   $('#message').text('Failed to Join Game!')
   $('form').trigger('reset')
