@@ -98,10 +98,12 @@ const onSignOutSuccess = responseData => {
   $(window).scrollTop(0)
   store.active = false
   $('#game-board-single').tooltip('enable')
-  $('.box').html('')
+  $('.box').text('')
   $('.box').removeClass('highlight-x')
   $('.box').removeClass('highlight-o')
   $('#game-board-single').tooltip('enable')
+  $('#game-board-multi').addClass('hide')
+  $('#game-board-single').removeClass('hide')
   $('#message').text('Signed out successfully!')
   $('#landing-auth').removeClass('hide')
   $('.dots').attr('data-toggle', '')

@@ -39,10 +39,7 @@ const Gameboard = function (
 ) {
   this.id = id
   this.cells = cells
-  // this.lastCellIndex = lastCellIndex
-  // this.lastCellValue = lastCellValue
   this.over = over
-  // this.lastSquareId = lastSquareId
   this.playerO = playerO
   this.playerX = playerX
   this.isWinner = ''
@@ -171,10 +168,6 @@ Gameboard.prototype.setDiffValue = function (val) {
 }
 
 Gameboard.prototype.diffValueCells = function (current, previous) {
-  // console.log('Previous from diff', this.getPreviousCells())
-  // console.log('Current from diff', this.getCells())
-  // const prevCells = this.getPreviousCells()
-  // const cells = this.getCells()
 
   previous.forEach((el, index) => {
     if (el !== current[index]) {
@@ -190,12 +183,6 @@ Gameboard.prototype.populate = function () {
     $(`#box-${i}-m`).text(`${gameArray[i]}`)
   }
 }
-
-// Gameboard.prototype.watch = function () {
-//   let gameWatcher = resourceWatcher('<server>/games/:id/watch', {
-//       Authorization: 'Token token=<token>'
-// });
-// }
 
 Gameboard.prototype.isPlayerTurn = function () {
   const boxsSelected = this.getCells().filter(box => box === 'x' || box === 'o')
@@ -213,13 +200,7 @@ Gameboard.prototype.watch = function () {
   // do whatever you like here
   let i = 0
 
-  if (!store.active) {
-    return
-  }
-
   function yourFunction () {
-    // console.log(i)
-    // console.log(store.game.FreshGame.getCells())
     i++
     if (i > 75) {
       return
@@ -229,35 +210,19 @@ Gameboard.prototype.watch = function () {
     } else if (store.game.FreshGame.isPlayerTurn() === 'player x' &&
      store.game.FreshGame.getPlayerXId() === store.user.id) {
       return
+    } else if (!store.active) {
+      return
     }
     api.onShowGame()
-      // .then(ui.onShowMultiGameSuccess)
       .then((responseData) => {
-        // console.log('success', responseData)
         $('#display').html('')
         $('#message').text('Watching')
 
         store.game.FreshGame.setCells(responseData.game.cells)
-        // console.log(store.game.FreshGame.getCells())
-        // store.game.FreshGame.getPreviousCells()
-        // console.log('Current cells show', store.game.FreshGame.getCells())
-        // console.log('Previous cells show', store.game.FreshGame.getPreviousCells())
         store.game.FreshGame.populate()
         store.game.FreshGame.isPlayerTurn()
-        // store.game.FreshGame.diffValueCells(store.game.FreshGame.getCells(), store.game.FreshGame.getPreviousCells())
-        // console.log(store.game.FreshGame.getDiffValue())
         store.game.FreshGame.onWin()
         store.game.FreshGame.isTie()
-
-        // console.log('Previous Show', store.game.FreshGame.getPreviousCells())
-        // console.log('Current Show', store.game.FreshGame.getCells())
-
-        // $('#message').append(`<p>Game id: ${store.game.FreshGame.getId()}
-        // cells: ${store.game.FreshGame.getCells()}
-        //   over: ${store.game.FreshGame.getOver()}
-        //   whos turn: ${store.game.FreshGame.isPlayerTurn()}
-        //   player_x: ${store.game.FreshGame.getPlayerXId()}
-        //   </p><hr>`)
       })
       .catch(ui.onShowMultiGameFailure)
 
@@ -267,9 +232,10 @@ Gameboard.prototype.watch = function () {
 }
 
 Gameboard.prototype.isTie = function () {
+  this.onWin()
   let tie = false
   const empty = this.cells.filter(el => el === '')
-  if (empty.length === 0) {
+  if (empty.length === 0 && !this.getOver()) {
     this.setOver(true)
     tie = true
     $.ajax({
@@ -293,7 +259,6 @@ Gameboard.prototype.isTie = function () {
 }
 
 Gameboard.prototype.onWin = function () {
-  // variables
   let route = []
   const nXn = 3
   const cells = this.getCells()
@@ -313,17 +278,9 @@ Gameboard.prototype.onWin = function () {
     }
     return symbol
   }
-  // console.log('cells', cells)
-  // console.log(wins)
-  // Actions
-
   // iterate through each win array in constructor
   wins.forEach(path => {
-    // iterate through each path cordinate
-    // console.log('Looking in win path' + ' ' + path)
     path.forEach(cord => {
-      // console.log('Coordinate pair' + ' ' + cord)
-
       if (route.length === 3) {
         if (allSame(route) === 'x' || allSame(route) === 'o') {
           this.setIsWinner(`Player ${lastValue}`)
@@ -347,14 +304,7 @@ Gameboard.prototype.onWin = function () {
         }
         route.splice(0, 3)
       }
-
       route.push(cells[cord[0] * nXn + cord[1]])
-      if (route.length === 3) {
-        // console.log(route)
-      }
-      if (this.getIsWinner()) {
-        // console.log('Winning player is ' + this.getIsWinner())
-      }
     })
   })
 }
@@ -363,11 +313,8 @@ Gameboard.prototype.onWinMulti = function (cells) {
   // variables
   const route = []
   const nXn = 3
-  // const cells = this.getCells()
   const wins = this.getWins()
-  // const lastValue = this.getLastCellValue()
 
-  // check if win path is populated with x's or o's
   const allSame = function (connect) {
     let symbol
     const allX = connect.every(el => el === 'x')
@@ -380,17 +327,11 @@ Gameboard.prototype.onWinMulti = function (cells) {
     }
     return symbol
   }
-  // console.log('cells', cells)
-  // console.log(wins)
   // Actions
 
   // iterate through each win array in constructor
   wins.forEach(path => {
-    // iterate through each path cordinate
-    // console.log('Looking in win path' + ' ' + path)
     path.forEach(cord => {
-      // console.log('Coordinate pair' + ' ' + cord)
-
       if (route.length === 3) {
         if (allSame(route) === 'x' || allSame(route) === 'o') {
           const xs = cells.filter((el) => el === 'x')
@@ -440,128 +381,9 @@ Gameboard.prototype.onWinMulti = function (cells) {
       }
 
       route.push(cells[cord[0] * nXn + cord[1]])
-      if (route.length === 3) {
-        // console.log(route)
-      }
-      if (this.getIsWinner()) {
-        // console.log('Winning player is ' + this.getIsWinner())
-      }
     })
   })
 }
-
-// const Gamenumber = new Gameboard(1,
-//   ['x', 'x', 'x', 'o', '', 'o', 'o', '', ''],
-//   false,
-//   {id: 20, email: 'a1@1.com'},
-//   {id: 30, email: 'b1@1.com'}
-// )
-// const Gameone = new Gameboard(1,
-//   ['x', 'o', 'o', 'x', 'x', 'x', 'o', '', ''],
-//   false,
-//   {id: 20, email: 'a1@1.com'},
-//   {id: 30, email: 'b1@1.com'}
-// )
-// const Gametwo = new Gameboard(1,
-//   ['o', '', '', 'o', 'o', 'x', 'x', 'x', 'x'],
-//   false,
-//   {id: 20, email: 'a1@1.com'},
-//   {id: 30, email: 'b1@1.com'}
-// )
-// const Gamethree = new Gameboard(1,
-//   ['x', '', '', 'x', 'x', 'o', 'x', 'o', 'o'],
-//   false,
-//   {id: 20, email: 'a1@1.com'},
-//   {id: 30, email: 'b1@1.com'}
-// )
-// const Gamefour = new Gameboard(1,
-//   ['o', 'x', 'o', '', 'x', 'o', '', 'x', 'x'],
-//   false,
-//   {id: 20, email: 'a1@1.com'},
-//   {id: 30, email: 'b1@1.com'}
-// )
-// const Gamefive = new Gameboard(1,
-//   ['o', 'o', 'x', 'x', 'o', 'x', '', '', 'x'],
-//   false,
-//   {id: 20, email: 'a1@1.com'},
-//   {id: 30, email: 'b1@1.com'}
-// )
-// const Gamesix = new Gameboard(1,
-//   ['x', 'o', 'o', '', 'x', '', 'o', 'x', 'x'],
-//   false,
-//   {id: 20, email: 'a1@1.com'},
-//   {id: 30, email: 'b1@1.com'}
-// )
-// const Gameseven = new Gameboard(1,
-//   ['x', 'o', 'x', 'o', 'x', '', 'x', 'o', ''],
-//   false,
-//   {id: 20, email: 'a1@1.com'},
-//   {id: 30, email: 'b1@1.com'}
-// )
-//
-// const Gameeight = new Gameboard(1,
-//   ['o', 'o', 'o', 'x', 'x', '', '', 'x', 'x'],
-//   false,
-//   {id: 20, email: 'a1@1.com'},
-//   {id: 30, email: 'b1@1.com'}
-// )
-//
-// const Gamenine = new Gameboard(1,
-//   ['x', '', 'o', 'x', 'o', 'x', 'o', '', ''],
-//   false,
-//   {id: 20, email: 'a1@1.com'},
-//   {id: 30, email: 'b1@1.com'}
-// )
-//
-// Gamenumber.setLastCellValue('x')
-// Gamenumber.setLastCellIndex(0)
-// Gamenumber.onWin()
-// Gamenumber.getIsWinner()
-//
-// Gameone.setLastCellValue('x')
-// Gameone.setLastCellIndex(0)
-// Gameone.onWin()
-// Gameone.getIsWinner()
-//
-// Gametwo.setLastCellValue('x')
-// Gametwo.setLastCellIndex(0)
-// Gametwo.onWin()
-// Gametwo.getIsWinner()
-//
-// Gamethree.setLastCellValue('x')
-// Gamethree.setLastCellIndex(0)
-// Gamethree.onWin()
-// Gamethree.getIsWinner()
-//
-// Gamefour.setLastCellValue('x')
-// Gamefour.setLastCellIndex(0)
-// Gamefour.onWin()
-// Gamefour.getIsWinner()
-//
-// Gamefive.setLastCellValue('x')
-// Gamefive.setLastCellIndex(0)
-// Gamefive.onWin()
-// Gamefive.getIsWinner()
-//
-// Gamesix.setLastCellValue('x')
-// Gamesix.setLastCellIndex(0)
-// Gamesix.onWin()
-// Gamesix.getIsWinner()
-//
-// Gameseven.setLastCellValue('x')
-// Gameseven.setLastCellIndex(0)
-// Gameseven.onWin()
-// Gameseven.getIsWinner()
-//
-// Gameeight.setLastCellValue('o')
-// Gameeight.setLastCellIndex(2)
-// Gameeight.onWin()
-// Gameeight.getIsWinner()
-//
-// Gamenine.setLastCellValue('o')
-// Gamenine.setLastCellIndex(2)
-// Gamenine.onWin()
-// Gamenine.getIsWinner()
 
 module.exports = {
   Gameboard

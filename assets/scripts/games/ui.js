@@ -234,8 +234,8 @@ const onUpdateGameSuccess = responseData => {
   store.game.FreshGame.setPreviousCells(game.cells)
   store.game.FreshGame.setId(game.id)
   // store.game.FreshGame.setOver(game.over)
-  store.game.FreshGame.isTie()
   store.game.FreshGame.onWin()
+  // store.game.FreshGame.isTie()
   // store.game.FreshGame.setPreviousCells(game.cells)
   if (store.game.FreshGame.getIsWinner()) {
     $('#message').text(`Winner is ${store.game.FreshGame.getIsWinner()}`)
@@ -273,8 +273,8 @@ const onUpdateMultiGameSuccess = responseData => {
   store.game.FreshGame.setPreviousCells(game.cells)
   store.game.FreshGame.setId(game.id)
   // store.game.FreshGame.setOver(game.over)
-  store.game.FreshGame.isTie()
   store.game.FreshGame.onWinMulti(game.cells)
+  // store.game.FreshGame.isTie()
   if (!store.game.FreshGame.getOver()) {
     // console.log('watching')
     store.game.FreshGame.watch()
